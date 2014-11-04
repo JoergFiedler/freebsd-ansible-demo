@@ -1,2 +1,9 @@
 ---
-ansible_python_interpreter: /usr/local/bin/python2
+ansible_python_interpreter: '/usr/local/bin/python2'
+
+zfs_checksum: 'fletcher4'
+
+ezjail_jaildir: '/jail'
+ezjail_jailzfs: 'tank/jail'
+ezjail_zfs_properties: '-o atime=off -o checksum=fletcher4'
+ezjail_zfs_jail_properties: ''

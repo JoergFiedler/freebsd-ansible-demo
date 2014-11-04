@@ -1,0 +1,4 @@
+---
+- name: restart ezjail
+  service: name=ezjail
+           state=restarted

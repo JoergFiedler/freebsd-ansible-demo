@@ -1,10 +1,4 @@
 ---
-- hosts: all
-  sudo: yes
-  tasks:
-    - name: Install Tarsnap
-      pkgng: name=tarsnap
-             state=present
+ - include: ezjail.yml tags=ezjail
+ - include: tarsnap.yml tags=tarsnap
 
-    - name: Create Tarsnap Key
-      command: echo 'uC3Duej0Ouf1eEdd9Iv3' | tarsnap-keygen --keyfile /root/tarsnap.key --user tarsnap@moumantai.de --machine vagrant-freebsd10

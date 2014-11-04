@@ -1,0 +1,32 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: Create ZFS dataset for ezjail
+      zfs: name={{ ezjail_jailzfs }}
+           state=present
+           checksum={{ zfs_checksum }}
+           mountpoint={{ ezjail_jaildir }}
+
+    - name: Install ezjail
+      pkgng: name=ezjail
+             state=present
+
+    - name: Base configuration for ezjail
+      template: src=templates/ezjail.conf.j2
+                dest=/usr/local/etc/ezjail.conf
+
+    - name: Initialize ezjail (check if already done)
+      shell: /bin/test -d {{ ezjail_jaildir }}/basejail
+      register: ezjail_basejail
+      ignore_errors: True
+      changed_when: "ezjail_basejail.rc != 0"
+
+    - name: Initialize ezjail
+      command: /usr/local/bin/ezjail-admin install
+      when: "ezjail_basejail.rc != 0"
+
+    - name: Enable ezjail
+      service: name=ezjail
+               enabled=true
+               state=started
