@@ -1,0 +1,25 @@
+---
+- name: Copy pf.conf
+  template: src=pf.conf.j2
+            dest=/etc/pf.conf
+            mode=640
+  notify:
+    - restart pf
+
+- name: Check nat_jails defintion file
+  stat: path=/etc/pf.table.nat_jails
+  register: table_file
+
+- name: Ensure nat_jails definition file exists
+  file: path=/etc/pf.table.nat_jails
+        state=touch
+        mode=640
+  notify:
+    - restart pf
+  when: not table_file.stat.exists
+
+- name: Enable pf firewall
+  service: name=pf
+           enabled=true
+  notify:
+    - restart pf

@@ -1,0 +1,12 @@
+EXT_IF="{{ pf_ext_if }}"
+IP_EXT="{{ pf_ext_ip }}"
+
+table <nat_jails> persist file "/etc/pf.table.nat_jails"
+
+scrub in all
+
+nat pass on $EXT_IF from <nat_jails> to any -> $IP_EXT
+
+pass out
+pass in
+

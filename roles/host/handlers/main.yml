@@ -1,0 +1,6 @@
+---
+- name: create cloned interfaces
+  command: service netif cloneup
+
+- name: restart pf
+  command: service pf reload

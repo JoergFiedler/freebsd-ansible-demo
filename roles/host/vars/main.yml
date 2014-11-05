@@ -1,0 +1,15 @@
+---
+iocage_zpool: 'tank'
+iocage_release_version: '10.0-RELEASE'
+iocage_dir: '/iocage'
+iocage_releases_dir: '{{ iocage_dir }}/releases'
+iocage_jails_dir: '{{ iocage_dir }}/jails'
+
+pf_ext_if: 'vtnet0'
+pf_ext_ip: '10.0.2.15'
+
+zfs_checksum: 'fletcher4'
+ezjail_jaildir: '/jail'
+ezjail_jailzfs: 'tank/jail'
+ezjail_zfs_properties: '-o atime=off -o checksum=fletcher4'
+ezjail_zfs_jail_properties: ''

@@ -1,0 +1,9 @@
+---
+#- name: Create Jail
+#  ezjail: name=jumphost
+#          state=running
+#          flavour=ansible-default
+#          ip_addr=lo1|10.0.8.1
+#          disktype=zfs
+#  tags: jail
+

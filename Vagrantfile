@@ -30,6 +30,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Use Ansible as provisioning tool
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
+    ansible.verbose = "vv"
+    ansible.raw_arguments = ["-M ./library"]
   end
 
 end

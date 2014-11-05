@@ -1,4 +1,6 @@
 ---
- - include: ezjail.yml tags=ezjail
- - include: tarsnap.yml tags=tarsnap
-
+- hosts: default
+  sudo: true
+  roles:
+    - host
+    - ssh-jumphost

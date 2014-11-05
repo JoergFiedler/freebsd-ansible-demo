@@ -1,0 +1,9 @@
+---
+- name: Configure jails network interface
+  lineinfile: dest=/etc/rc.conf
+              state=present
+              insertafter=EOF
+              line="cloned_interfaces=\"${cloned_interfaces} lo1\""
+  notify:
+    - create cloned interfaces
+
