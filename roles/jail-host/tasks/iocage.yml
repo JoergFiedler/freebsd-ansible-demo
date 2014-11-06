@@ -5,8 +5,9 @@
   register: zpool_comment
 
 - name: Check if release {{ iocage_release_version}} is fetched
-  stat: path={{ iocage_releases_dir }}/{{ iocage_release_version }}
-        get_md5=no
+  stat:
+    path: '{{ iocage_releases_dir }}/{{ iocage_release_version }}'
+    get_md5: no
   register: release_dir
 
 - name: Mark zpool for iocage usage
@@ -14,13 +15,20 @@
   when: zpool_comment.stdout | search("tank.*comment.*-")
 
 - name: Install iocage
-  pkgng: name=iocage
-         state=present
+  pkgng:
+    name: iocage
+    state: present
 
 - name: Fetch FreeBSD release {{ iocage_release_version }}
   shell: echo "{{ iocage_release_version }}" | /usr/local/sbin/iocage fetch ftpfiles="base.txz doc.txz"
   when: release_dir.stat.isdir is undefined
 
+- name: Create pkglist file
+  copy:
+    src: pkglist.txt
+    dest: '{{ iocage_jails_dir }}/pkglist.txt'
+
 - name: Enable iocage service
-  service: name=iocage
-           enabled=true
+  service:
+    name: iocage
+    enabled: true

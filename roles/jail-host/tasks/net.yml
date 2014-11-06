@@ -1,9 +1,31 @@
 ---
 - name: Configure jails network interface
-  lineinfile: dest=/etc/rc.conf
-              state=present
-              insertafter=EOF
-              line="cloned_interfaces=\"${cloned_interfaces} lo1\""
-  notify:
-    - create cloned interfaces
+  lineinfile:
+    dest: '/etc/rc.conf'
+    state: present
+    line: "cloned_interfaces=\"lo1\""
+  register: cloned_interfaces
 
+- name: Create jails network interface
+  command: service netif cloneup
+  when: cloned_interfaces.changed
+
+- name: Configure internal ip on jails network interface
+  lineinfile:
+    dest: '/etc/rc.conf'
+    state: present
+    line: 'ifconfig_lo1=\"inet {{ int_ip }} netmask 255.255.255.255\"'
+  register: internal_ip
+
+- name: Add internal ip to jails network interface
+  command: ifconfig lo1 inet {{ int_ip }} netmask 255.255.255.255
+  when: internal_ip.changed
+
+- name: Restrict sshd to machine's public ip
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    insertbefore: '^#Port 22'
+    regexp: '^ListenAddress'
+    line: 'ListenAddress {{ ext_ip }}'
+  notify:
+    - reload sshd

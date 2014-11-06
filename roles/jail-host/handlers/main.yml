@@ -1,4 +1,3 @@
 ---
-- name: create cloned interfaces
-  command: service netif cloneup
-
+- name: reload sshd
+  command: service sshd reload
