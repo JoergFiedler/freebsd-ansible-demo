@@ -1,0 +1,73 @@
+---
+- name: Find UUID for {{ jail_name }}
+  shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
+  changed_when: false
+  register: jail_uuid
+
+- name: Create jail {{ jail_name }}
+  command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip }} boot=on
+  when: not jail_uuid.stdout
+
+- name: Find UUID for {{ jail_name }}
+  shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
+  changed_when: false
+  register: jail_uuid
+
+- name: Register jail's home diretory
+  command: echo {{ iocage_jails_dir }}/{{ jail_uuid.stdout }}/root
+  changed_when: false
+  register: jail_home
+
+- name: Enable sshd on {{ jail_name }}
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/rc.conf'
+    state: 'present'
+    regexp: '^sshd_enabled='
+    line: 'sshd_enabled=\"YES\"'
+
+- name: Create ansible user on {{ jail_name }}
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/master.passwd'
+    state: present
+    insertafter: EOF
+    line: 'vagrant:*:1001:1001::0:0:Ansible Management User:/home/vagrant:/bin/sh'
+  register: user
+
+- name: Update user database
+  command: pwd_mkdb -p -d {{ jail_home.stdout }}/etc {{ jail_home.stdout }}/etc/master.passwd
+  when: user.changed
+
+- name: Create directories to sudoers file
+  file:
+    path: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d'
+    state: directory
+
+- name: Add sudo rules for ansible user on {{ jail_name }}
+  copy:
+    src: sudoers.ansible
+    dest: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d/ansible'
+    validate: 'visudo -cf %s'
+
+- name: Create .ssh directry for ansible user on {{ jail_name }}
+  file:
+    path: '{{ jail_home.stdout }}/home/vagrant/.ssh'
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+    state: directory
+
+- name: Add trusted ssh key to authorized_hosts on {{ jail_name }}
+  copy:
+    dest: '{{ jail_home.stdout }}/home/vagrant/.ssh/authorized_keys'
+    owner: vagrant
+    owner: vagrant
+    content: '{{ ssh_pub_key }}'
+
+- name: Add jail {{ jail_name }} to allowed NAT hosts
+  lineinfile:
+    dest: '/etc/pf.table.nat_jails'
+    insertafter: EOF
+    line: '{{ jail_ip }}'
+  notify:
+    - restart pf
+
