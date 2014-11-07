@@ -13,6 +13,7 @@ nat pass log on $ext_if from <nat_jails> to any -> $ext_ip
 # Includes from jails
 
 pass out quick log on {{ ext_if }} proto { tcp,udp } from {{ ext_ip }} to any port 53
+pass out quick log on {{ ext_if }} proto { tcp } from {{ ext_ip }} to any port { 80,443 }
 
 block out log
 block in log

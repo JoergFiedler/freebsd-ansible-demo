@@ -25,5 +25,12 @@
   lineinfile:
     dest: /etc/ssh/sshd_config
     insertbefore: '^#Port 22'
-    regexp: '^ListenAddress'
+    regexp: '^ListenAddress {{ int_ip }}'
     line: 'ListenAddress {{ int_ip }}'
+
+- name: Restrict sshd to machine's external ip
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    insertbefore: '^#Port 22'
+    regexp: '^ListenAddress {{ ext_ip }}'
+    line: 'ListenAddress {{ ext_ip }}'
