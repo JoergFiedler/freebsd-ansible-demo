@@ -1,0 +1,23 @@
+---
+- name: Enable sshd on {{ jail_name }}
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/rc.conf'
+    state: 'present'
+    regexp: '^sshd_enable='
+    line: 'sshd_enable=\"YES\"'
+
+- name: Create .ssh directry for ansible user on {{ jail_name }}
+  file:
+    path: '{{ jail_home.stdout }}/home/vagrant/.ssh'
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+    state: directory
+
+- name: Add trusted ssh key to authorized_hosts on {{ jail_name }}
+  copy:
+    dest: '{{ jail_home.stdout }}/home/vagrant/.ssh/authorized_keys'
+    owner: vagrant
+    owner: vagrant
+    content: '{{ ssh_pub_key }}'
+

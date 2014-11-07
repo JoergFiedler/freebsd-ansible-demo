@@ -1,0 +1,20 @@
+---
+- name: Copy jail's pf configuration
+  template:
+    src: 'pf.sub.conf.j2'
+    dest: '/etc/pf.sub.{{ jail_name }}.conf'
+
+- name: Add jail's pf configuration to pf.conf
+  lineinfile:
+    dest: '/etc/pf.conf'
+    state: present
+    insertafter: '^# Includes'
+    regexp: '^include \"/etc/pf.sub.{{ jail_name }}.conf\"'
+    line: 'include \"/etc/pf.sub.{{ jail_name }}.conf\"'
+
+- name: Add jail {{ jail_name }} to allowed NAT hosts
+  lineinfile:
+    dest: '/etc/pf.table.nat_jails'
+    insertafter: EOF
+    line: '{{ jail_ip }}'
+
