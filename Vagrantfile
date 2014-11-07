@@ -3,6 +3,7 @@
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
+PRIVATE_IP = "10.0.2.15"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
@@ -14,8 +15,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_download_checksum = "3418526d3a67313d3763ac75eb5b46c2d5d90837342e9d4fdef46dc387128735"
   config.vm.box_download_checksum_type = "sha256"
 
+  config.vm.network "private_network", ip: PRIVATE_IP
+
   config.ssh.proxy_command = "/usr/bin/ssh -p 2222 -i ~/.vagrant.d/insecure_private_key  -o 'StrictHostKeyChecking no' -o 'UserKnownHostsFile=/dev/null' -q vagrant@localhost -W %h:22"
-  config.ssh.host = "10.0.2.15"
+  config.ssh.host = PRIVATE_IP
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
@@ -34,7 +37,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
     ansible.raw_ssh_args = ["-o ProxyCommand='/usr/bin/ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2222 -i ~/.vagrant.d/insecure_private_key -q vagrant@localhost -W %h:22'"]
-    ansible.verbose = 'vvvv'
   end
 
 end
