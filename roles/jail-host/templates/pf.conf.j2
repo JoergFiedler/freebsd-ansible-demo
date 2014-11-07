@@ -1,12 +1,18 @@
-EXT_IF="{{ ext_if }}"
-IP_EXT="{{ ext_ip }}"
+ext_if="{{ ext_if }}"
+ext_ip="{{ ext_ip }}"
+
+sshd_port=22
 
 table <nat_jails> persist file "/etc/pf.table.nat_jails"
 
 scrub in all
 
-nat pass on $EXT_IF from <nat_jails> to any -> $IP_EXT
+# NAT rules
+nat pass log on $ext_if from <nat_jails> to any -> $ext_ip
 
-pass out
-pass in
+# Includes
 
+pass out log on {{ ext_if }} proto { tcp,udp } from {{ ext_ip }} to any port 53
+
+block out log
+block in log

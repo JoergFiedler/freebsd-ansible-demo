@@ -2,17 +2,30 @@
 - name: Add jail ip to /etc/rc.conf
   lineinfile:
     dest: /etc/rc.conf
-    line: 'ifconfig_lo1_alias=\"inet {{ jail_ip }} netmask 255.255.255.255\"'
+    line: 'ifconfig_{{ int_if }}_alias=\"inet {{ jail_ip }} netmask 255.255.255.255\"'
   register: add_ip
 
 - name: Add jail ip to interface
-  command: ifconfig lo1 inet {{ jail_ip }} netmask 255.255.255.255
+  command: ifconfig {{ int_if }} inet {{ jail_ip }} netmask 255.255.255.255
   when: add_ip.changed
 
 - name: Find UUID for {{ jail_name }}
   shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
   changed_when: false
   register: jail_uuid
+
+- name: Copy jail's pf configuration
+  template:
+    src: 'pf.sub.conf.j2'
+    dest: '/etc/pf.sub.{{ jail_name }}.conf'
+
+- name: Add jail's pf configuration to pf.conf
+  lineinfile:
+    dest: '/etc/pf.conf'
+    state: present
+    insertafter: '^# Includes'
+    regexp: '^include \"/etc/pf.sub.{{ jail_name }}.conf\"'
+    line: 'include \"/etc/pf.sub.{{ jail_name }}.conf\"'
 
 - name: Create jail {{ jail_name }}
   command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }} boot=on pkglist={{ iocage_jails_dir }}/pkglist.txt
@@ -78,6 +91,4 @@
     dest: '/etc/pf.table.nat_jails'
     insertafter: EOF
     line: '{{ jail_ip }}'
-  notify:
-    - restart pf
 
