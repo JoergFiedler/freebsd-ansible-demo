@@ -36,3 +36,10 @@ or
 1. Create other jails (web, dns, mail)
 1. Create configuration to recreate this instance on EC2 
 
+## Powered By
+
+1. [FreeBSD](https://www.freebsd.org)
+1. [iocage](https://github.com/pannon/iocage)
+1. [VirtualBox](https://www.virtualbox.org)
+1. [Ansible](http://www.ansible.com)
+1. [Vagrant](https://www.vagrantup.com)
