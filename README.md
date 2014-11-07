@@ -2,7 +2,7 @@
 
 It's still work in progress.
 
-Simple demo project. Show how to use Ansible and iocage to set up
+Simple demo project. Shows how to use Ansible and iocage to set up
 a FreeBSD jail server.
 
 ## Requirements
