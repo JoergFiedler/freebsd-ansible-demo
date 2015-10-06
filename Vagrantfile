@@ -16,14 +16,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://s3-eu-west-1.amazonaws.com/vastland.moumantai.de/public/FreeBSD/vagrant-box/FreeBSD-10-vagrant-base.box"
-  config.vm.box_download_checksum = "3418526d3a67313d3763ac75eb5b46c2d5d90837342e9d4fdef46dc387128735"
+  config.vm.box_url = "https://s3-eu-west-1.amazonaws.com/vastland.moumantai.de/public/FreeBSD/vagrant-box/FreeBSD-10.2-vagrant-base.box"
+  config.vm.box_download_checksum = "26d251676c9747a6e1a7446bfd5e50cbdb8de09e1eb58295fd91491267a55e46"
   config.vm.box_download_checksum_type = "sha256"
 
   config.vm.network "private_network", ip: PRIVATE_IP
 
   config.ssh.proxy_command = PROXY_COMMAND
   config.ssh.host = PRIVATE_IP
+  config.ssh.insert_key = false
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
