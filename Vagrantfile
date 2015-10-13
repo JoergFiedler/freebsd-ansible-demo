@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_download_checksum = "26d251676c9747a6e1a7446bfd5e50cbdb8de09e1eb58295fd91491267a55e46"
   config.vm.box_download_checksum_type = "sha256"
 
-  config.vm.network "private_network", ip: PRIVATE_IP
+  config.vm.network "private_network", ip: PRIVATE_IP, auto_config: false
 
   config.ssh.proxy_command = PROXY_COMMAND
   config.ssh.host = PRIVATE_IP
@@ -38,7 +38,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
     vb.customize ["modifyvm", :id, "--audio", "none"]
     vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
-    vb.customize ["modifyvm", :id, "--nictype2", "virtio"]
   end
 
   # Use Ansible as provisioning tool
