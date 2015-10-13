@@ -8,7 +8,9 @@ PROXY_COMMAND = "/usr/bin/ssh -p 2222 " +
                 "-i ~/.vagrant.d/insecure_private_key " +
                 "-o StrictHostKeyChecking=no " +
                 "-o UserKnownHostsFile=/dev/null " +
-                "-q vagrant@localhost -W %h:22"
+                "-q " +
+                "vagrant@localhost " +
+                "-W %h:22"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.

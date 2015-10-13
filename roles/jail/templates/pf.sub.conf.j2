@@ -1,9 +1,0 @@
-jump_host="{{ jail_ip }}"
-sshd_port="22"
-
-rdr pass log on {{ ext_if }} proto tcp from any to {{ ext_ip }} port $sshd_port \
-  -> $jump_host port $sshd_port
-
-pass quick log on {{ int_if }} proto tcp from $jump_host to any port $sshd_port
-pass quick log on lo0 proto tcp from $jump_host to {{ ext_ip }} port $sshd_port
-

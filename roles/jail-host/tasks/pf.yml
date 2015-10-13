@@ -6,14 +6,44 @@
     mode: 0640
 
 - name: Check nat_jails defintion file
-  stat: path=/etc/pf.table.nat_jails
+  stat: path=/etc/pf.table.nat-jails
   register: table_file
 
-- name: Ensure nat_jails definition file exists
-  file: path=/etc/pf.table.nat_jails
+- name: Check anchor.nat-jail rules defintion file
+  stat: path=/etc/pf.anchor.nat-jail.conf
+  register: anchor_nat_jail
+
+- name: Check anchor.rdr-jail rules defintion file
+  stat: path=/etc/pf.anchor.rdr-jail.conf
+  register: anchor_rdr_jail
+
+- name: Check anchor.rls-jail rules defintion file
+  stat: path=/etc/pf.anchor.rls-jail.conf
+  register: anchor_rls_jail
+
+- name: Ensure nat jails definition file exists
+  file: path=/etc/pf.table.nat-jails
         state=touch
         mode=640
   when: not table_file.stat.exists
+
+- name: Ensure nat jail rules definition file exists
+  file: path=/etc/pf.anchor.nat-jail.conf
+        state=touch
+        mode=640
+  when: not anchor_nat_jail.stat.exists
+
+- name: Ensure rdr jail rules definition file exists
+  file: path=/etc/pf.anchor.rdr-jail.conf
+        state=touch
+        mode=640
+  when: not anchor_rdr_jail.stat.exists
+
+- name: Ensure rls jail rules definition file exists
+  file: path=/etc/pf.anchor.rls-jail.conf
+        state=touch
+        mode=640
+  when: not anchor_rls_jail.stat.exists
 
 - name: Enable pf firewall
   service: name=pf

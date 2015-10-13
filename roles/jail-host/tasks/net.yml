@@ -1,24 +1,13 @@
 ---
-- name: Configure jails network interface
-  lineinfile:
-    dest: '/etc/rc.conf'
-    state: present
-    line: "cloned_interfaces=\"{{ int_if }}\""
-  register: cloned_interfaces
-
-- name: Create jails network interface
-  command: service netif cloneup
-  when: cloned_interfaces.changed
-
 - name: Configure internal ip on jails network interface
   lineinfile:
     dest: '/etc/rc.conf'
     state: present
-    line: 'ifconfig_{{ int_if }}=\"inet {{ int_ip }} netmask 255.255.255.255\"'
+    line: 'ifconfig_{{ int_if }}_alias0=\"inet {{ int_ip }} netmask 255.255.255.255\"'
   register: internal_ip
 
 - name: Add internal ip to jails network interface
-  command: ifconfig {{ int_if }} inet {{ int_ip }} netmask 255.255.255.255
+  command: ifconfig {{ int_if }} inet alias {{ int_ip }} netmask 255.255.255.255
   when: internal_ip.changed
 
 - name: Restrict sshd to machine's internal ip
@@ -28,9 +17,3 @@
     regexp: '^ListenAddress {{ int_ip }}'
     line: 'ListenAddress {{ int_ip }}'
 
-- name: Restrict sshd to machine's external ip
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    insertbefore: '^#Port 22'
-    regexp: '^ListenAddress {{ ext_ip }}'
-    line: 'ListenAddress {{ ext_ip }}'
