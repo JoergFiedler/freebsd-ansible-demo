@@ -13,11 +13,20 @@
   changed_when: false
   register: jail_uuid
 
-- name: Enable jails autostart
+- name: Enable jails {{ jail_name }} autostart
   command: /usr/local/sbin/iocage set boot=on {{ jail_uuid.stdout }}
   changed_when: false
 
-- name: Register jail's home diretory
+- name: Check if jail {{ jail_name }} is started
+  shell: /usr/local/sbin/iocage exec {{ jail_uuid.stdout }} uname || echo 'not started'
+  changed_when: false
+  register: uname
+
+- name: "Start jail {{ jail_name }}"
+  command: /usr/local/sbin/iocage start {{ jail_uuid.stdout }}
+  when: uname.stdout | search('not started')
+
+- name: Register jail s home diretory
   command: echo {{ iocage_jails_dir }}/{{ jail_uuid.stdout }}/root
   changed_when: false
   register: jail_home
