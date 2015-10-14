@@ -1,4 +1,4 @@
-# FreeBSD, iocage, Ansible
+# FreeBSD iocage Ansible
 
 How to use Ansible and iocage to set up a FreeBSD jail server.
 
