@@ -45,10 +45,13 @@
         mode=640
   when: not anchor_rls_jail.stat.exists
 
-- name: Enable pf firewall
-  service: name=pf
-           enabled=true
-
 - name: Enable pf log
   service: name=pflog
            enabled=true
+           state=reloaded
+
+- name: Enable pf firewall
+  service: name=pf
+           enabled=true
+           state=reloaded
+

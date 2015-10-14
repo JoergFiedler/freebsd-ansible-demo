@@ -1,4 +1,7 @@
 ---
-- name: restart pf
-  command: service pf reload
+- name: start jails
+  command: service iocage start
 
+- name: reload pf
+  service: name=pf
+           state=reloaded

@@ -7,6 +7,8 @@
 - name: Create jail {{ jail_name }}
   command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }} pkglist={{ iocage_jails_dir }}/pkglist.txt
   when: not jail_uuid.stdout
+  notify:
+    - start jails
 
 - name: Find UUID for {{ jail_name }}
   shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
@@ -16,15 +18,6 @@
 - name: Enable jails {{ jail_name }} autostart
   command: /usr/local/sbin/iocage set boot=on {{ jail_uuid.stdout }}
   changed_when: false
-
-- name: Check if jail {{ jail_name }} is started
-  shell: /usr/local/sbin/iocage exec {{ jail_uuid.stdout }} uname || echo 'not started'
-  changed_when: false
-  register: uname
-
-- name: "Start jail {{ jail_name }}"
-  command: /usr/local/sbin/iocage start {{ jail_uuid.stdout }}
-  when: uname.stdout | search('not started')
 
 - name: Register jail s home diretory
   command: echo {{ iocage_jails_dir }}/{{ jail_uuid.stdout }}/root

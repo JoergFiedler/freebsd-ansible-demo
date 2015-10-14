@@ -5,6 +5,7 @@ sshd_port=22
 
 table <nat_jails> persist file "/etc/pf.table.nat-jails"
 
+set block-policy return
 scrub in all
 
 ###########
