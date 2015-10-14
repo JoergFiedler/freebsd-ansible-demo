@@ -6,5 +6,10 @@ sudo: false
 addons:
   apt:
     packages:
-    - virtualbox
     - python-pip
+
+install:
+  - pip install ansible
+
+script:
+  - "$(which true)"
