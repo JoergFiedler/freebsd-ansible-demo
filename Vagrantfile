@@ -45,6 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "site.yml"
     ansible.tags = ENV['CMD_ANSIBLE_TAGS']
     ansible.raw_ssh_args = ["-o ProxyCommand='" + PROXY_COMMAND + "'"]
+    ansible.verbose = ENV['CMD_ANSIBLE_VERBOSE']
   end
 
 end
