@@ -14,7 +14,7 @@
   notify:
     - reload pf
 
-- name: Copy i{{ jail_name }} pf configuration (rls rules)
+- name: Copy {{ jail_name }} pf configuration (rls rules)
   template:
     src: 'pf.anchor.rls-jail.conf.j2'
     dest: '/etc/pf.anchor.rls-jail.{{ jail_name }}.conf'

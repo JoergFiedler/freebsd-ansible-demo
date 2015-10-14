@@ -1,6 +1,13 @@
 # allow outgoing SSH from jump host to host's external ip
-# will be redirect to host's internal ip
+# which will be redirect to host's internal ip
 pass out quick log on {{ int_if }} proto tcp \
   from {{ jail_ip }} \
   to {{ ext_ip }} port {{ sshd_port }} \
+  flags S/SA keep state
+
+# allow ssh connections from jump host to
+# all internal hosts
+pass quick log on {{ int_if }} proto tcp \
+  from {{ jail_ip }} \
+  to {{ int_net }} port {{ sshd_port }} \
   flags S/SA keep state
