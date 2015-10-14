@@ -9,6 +9,7 @@ addons:
     - python-pip
 
 install:
+  - vagrant plugin install vagrant-aws
   - pip install ansible
 
 script:
