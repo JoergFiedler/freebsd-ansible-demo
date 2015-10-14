@@ -30,7 +30,6 @@ or
 
 ## Next Steps
 
-1. Remove reboot step
 1. Complete documentation (draw the big picture)
 1. Synchronize Vagrant/Ansible configuration
 1. Create other jails (web, dns, mail)
