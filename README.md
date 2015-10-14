@@ -1,13 +1,17 @@
 # Ansible/FreeBSD/iocage
 
-It's still work in progress.
+How to use Ansible and iocage to set up a FreeBSD jail server.
 
-Simple demo project. Shows how to use Ansible and iocage to set up
-a FreeBSD jail server.
+![Big Picture](https://github.com/JoergFiedler/freebsd-ansible-demo/raw/master/doc/big-picture-draw.io.png)
+
+## Goals
+
+- Ansible playbook that creates a FreeBSD server which hosts multiple jails.
+- No service on the host is externally exposed.
+- All services that accept external connections terminate within a jail.
+- The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
 
 ## Requirements
-
-You need to have to following software installed.
 
 1. Ansible
 1. VirtualBox
@@ -17,8 +21,6 @@ You need to have to following software installed.
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsdd-ansible-demo
     vagrant up
-
-After the instance is provisioned you have to restart it.
 
 Login into the jail host.
 
@@ -30,9 +32,8 @@ or
 
 ## Next Steps
 
-1. Complete documentation (draw the big picture)
-1. Synchronize Vagrant/Ansible configuration
 1. Create other jails (web, dns, mail)
+1. Synchronize Vagrant/Ansible configuration
 1. Create configuration to recreate this instance on EC2 
 
 ## Powered By
