@@ -12,5 +12,7 @@ install:
 script:
 - vagrant up --provider=aws
 - vagrant destroy
+
 env:
-  secure: bMWcAp12By3eINeCx+qTUeQjTbqnbpJzVXVYExhHbJaWkpJskDrmCUOUNgR34F2tTOtz+O0b7KOqemZ3UPyQTyPu3LQ6V+S0NhCkM0zH36Gir49AEVPfiBnu7cXgZEcGuenUhODXL8EVZxgbj6gXpqeRbQDKrA6okOXIb2xwL6g=
+  secure: a6djzDXyErLludVb1xVaIk63gTw4AjqFBW0JMeofjF2L0MScASnkyKEPL7gzyrP6YWWUT0VlTxkMZfDx/lAYUh3uuZRkJnW/txoxJu0E6/jWYcGOZiODw1rXqsJObekXcjZ+/kGy9Fxs9AqkgzW52SQVUJOAnZsI6fzgNTjQ+i4=
+  secure: Y554K7VMIMD7jqeEyB6YVq2ZXZmy2s5sh04GoXJb6hJlANdqPtK6BjQlIh6VNtFF6F65MDji+fo0rU1k4MnRx9N7/OjNTFg8QpWv0xX2YM3+PQN9b53Shys5xHQek6w6RgQCSU3UQ7dVS9qTwZbwuz1ra/o/9k1ntlzukgFs4Zc=
