@@ -1,17 +1,16 @@
----
 language: python
-python: "2.7"
+python: '2.7'
 sudo: required
-
 before_install:
-  - sudo apt-get update -qq
-
+- sudo apt-get update -qq
 install:
-  - sudo apt-get install -y python-pip
-  - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-  - sudo dpkg -i vagrant_1.7.4_x86_64.deb
-  - vagrant plugin install vagrant-aws
-  - pip install ansible
-
+- sudo apt-get install -y python-pip
+- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+- sudo dpkg -i vagrant_1.7.4_x86_64.deb
+- vagrant plugin install vagrant-aws
+- pip install ansible
 script:
-  - "$(which true)"
+- vagrant up --provider=aws
+- vagrant destroy
+env:
+  secure: bMWcAp12By3eINeCx+qTUeQjTbqnbpJzVXVYExhHbJaWkpJskDrmCUOUNgR34F2tTOtz+O0b7KOqemZ3UPyQTyPu3LQ6V+S0NhCkM0zH36Gir49AEVPfiBnu7cXgZEcGuenUhODXL8EVZxgbj6gXpqeRbQDKrA6okOXIb2xwL6g=

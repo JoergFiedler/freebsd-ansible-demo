@@ -62,12 +62,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.raw_ssh_args = ["-o ProxyCommand='#{proxy_command}'"]
     end
 
-
     aws.access_key_id = ENV['ACCESS_KEY']
     aws.secret_access_key = ENV['SECRET_ACCESS_KEY']
     aws.ssh_host_attribute = :dns_name
     aws.keypair_name = "ec2-user"
-    aws.user_data = "#!/bin/sh\ntouch /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"awscli sudo bash python27\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
+    aws.user_data = "#!/bin/sh\necho 'pass all keep state' >> /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"awscli sudo bash python27\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1',
         'Ebs.VolumeSize' => 10,
