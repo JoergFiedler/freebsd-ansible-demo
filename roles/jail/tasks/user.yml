@@ -1,10 +1,10 @@
 ---
-- name: Create ansible user on {{ jail_name }}
+- name: Create ssh user on {{ jail_name }}
   lineinfile:
     dest: '{{ jail_home.stdout }}/etc/master.passwd'
     state: present
     insertafter: EOF
-    line: 'vagrant:*:1001:1001::0:0:Ansible Management User:/home/vagrant:/bin/sh'
+    line: '{{ ssh_user }}:*:1001:1001::0:0:Remote (ssh) Management User:/home/{{ ssh_user }}:/bin/sh'
   register: user
 
 - name: Update user database
@@ -16,8 +16,8 @@
     path: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d'
     state: directory
 
-- name: Add sudo rules for ansible user on {{ jail_name }}
-  copy:
-    src: sudoers.ansible
-    dest: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d/ansible'
+- name: Add sudo rules for ssh user on {{ jail_name }}
+  template:
+    src: sudoers.user.p2
+    dest: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d/{{ ssh_user }}'
     validate: 'visudo -cf %s'
