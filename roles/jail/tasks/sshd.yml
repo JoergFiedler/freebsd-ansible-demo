@@ -8,7 +8,7 @@
 
 - name: Create .ssh directry for ansible user on {{ jail_name }}
   file:
-    path: '{{ jail_home.stdout }}/home/vagrant/.ssh'
+    path: '{{ jail_home.stdout }}/home/{{ ssh_user }}/.ssh'
     owner: '{{ ssh_user }}'
     group: '{{ ssh_user }}'
     mode: 0700
@@ -16,7 +16,7 @@
 
 - name: Add trusted ssh key to authorized_hosts on {{ jail_name }}
   copy:
-    dest: '{{ jail_home.stdout }}/home/vagrant/.ssh/authorized_keys'
+    dest: '{{ jail_home.stdout }}/home/{{ ssh_user }}/.ssh/authorized_keys'
     owner: '{{ ssh_user }}'
     group: '{{ ssh_user }}'
     content: '{{ ssh_pub_key }}'

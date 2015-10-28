@@ -10,9 +10,8 @@ PROXY_COMMAND = "/usr/bin/ssh -p %p " +
                 "-i ~/.vagrant.d/insecure_private_key " +
                 "-o StrictHostKeyChecking=no " +
                 "-o UserKnownHostsFile=/dev/null " +
-                "-vvvv " +
-                "-o LogLevel=DEBUG " +
-                "-W %h:22"
+                "-q " +
+                "-W 10.1.0.1:22"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
@@ -59,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       ip = config.vm.ssh_info[:host]
       ansible.playbook = "site.yml"
+      ansible.extra_vars = "./ec2.yml"
       ansible.tags = ENV['CMD_ANSIBLE_TAGS']
       ansible.verbose = ENV['CMD_ANSIBLE_VERBOSE']
       ansible.raw_ssh_args = ["-o ProxyCommand='#{proxy_command}'"]
@@ -68,7 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.access_key_id = ENV['ACCESS_KEY']
     aws.secret_access_key = ENV['SECRET_ACCESS_KEY']
     aws.keypair_name = "ec2-user"
-    aws.user_data = ">>/etc/rc.conf\nfirstboot_pkgs_list=\"sudo bash python27\""
+    aws.user_data = "#!/bin/sh\ntouch /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"awscli sudo bash python27\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1',
         'Ebs.VolumeSize' => 10,

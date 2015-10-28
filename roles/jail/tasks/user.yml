@@ -11,13 +11,3 @@
   command: pwd_mkdb -p -d {{ jail_home.stdout }}/etc {{ jail_home.stdout }}/etc/master.passwd
   when: user.changed
 
-- name: Create directories to sudoers file
-  file:
-    path: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d'
-    state: directory
-
-- name: Add sudo rules for ssh user on {{ jail_name }}
-  template:
-    src: sudoers.user.p2
-    dest: '{{ jail_home.stdout }}/usr/local/etc/sudoers.d/{{ ssh_user }}'
-    validate: 'visudo -cf %s'
