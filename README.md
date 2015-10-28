@@ -31,6 +31,12 @@ Login into the jail host.
 1. Create other jails (web, dns, mail)
 1. Synchronize Vagrant/Ansible configuration
 
+## Useful Links
+
+1. [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/)
+1. [EC2 Instance IP Addressing](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
+1. [unix domain socket too long](https://github.com/ansible/ansible/issues/11536)
+
 ## Powered By
 
 1. [FreeBSD](https://www.freebsd.org)
@@ -38,4 +44,3 @@ Login into the jail host.
 1. [VirtualBox](https://www.virtualbox.org)
 1. [Ansible](http://www.ansible.com)
 1. [Vagrant](https://www.vagrantup.com)
-1. [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/)
