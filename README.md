@@ -1,3 +1,4 @@
+https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=travis-integration
 # FreeBSD iocage Ansible
 
 How to use Ansible and iocage to set up a FreeBSD jail server.
