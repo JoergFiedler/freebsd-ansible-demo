@@ -26,15 +26,17 @@ Login into the jail host.
 
     vagrant ssh
 
-or
-
-    ssh -F ssh-config 10.1.0.1
-
 ## Next Steps
 
 1. Create other jails (web, dns, mail)
 1. Synchronize Vagrant/Ansible configuration
-1. Create configuration to recreate this instance on EC2 
+
+## Useful Links
+
+1. [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/)
+1. [EC2 Instance IP Addressing](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
+1. [unix domain socket too long](https://github.com/ansible/ansible/issues/11536)
+1. [Encrypted Variables](http://docs.travis-ci.com/user/environment-variables/#Encrypted-Variables)
 
 ## Powered By
 
