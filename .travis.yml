@@ -2,11 +2,9 @@ language: python
 python: '2.7'
 sudo: required
 
-before_install:
-- sudo apt-get update -qq
-
 install:
 - pip install ansible
+- pip install netaddr
 
 before_script:
 - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
@@ -15,8 +13,10 @@ before_script:
 - vagrant plugin install vagrant-aws
 
 script:
+- vagrant box add --name JoergFiedler/freebsd-box metadata.json --provider aws
 - vagrant up --provider=aws
-- vagrant destroy
+- test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
+- vagrant destroy -f
 
 env:
   global:
