@@ -8,8 +8,10 @@ install:
 - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
 - dpkg -x vagrant_1.7.4_x86_64.deb ~/opt
 - ~/opt/vagrant/bin/vagrant plugin install vagrant-aws
+- ls -lisa *
 - pip install ansible
 script:
+- ls -lisa *
 - ./opt/vagrant/bin/vagrant up --provider=aws
 - ./opt/vagrant/bin/vagrant destroy
 
