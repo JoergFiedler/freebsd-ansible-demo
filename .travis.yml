@@ -14,6 +14,7 @@ before_script:
 script:
 - vagrant init murdochjohn/FreeBSD
 - vagrant up --provider=aws
+- test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
 - vagrant destroy
 
 env:
