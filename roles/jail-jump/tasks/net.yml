@@ -10,6 +10,6 @@
   when: add_ip.changed
 
 - name: Create working resolv.conf for jail
-  copy:
-    dest: '{{ jail_home.stdout }}/etc/resolv.conf'
+  template:
+    dest: '{{ jail_home.stdout }}/etc/resolv.conf.j2'
     src: 'resolv.conf'
