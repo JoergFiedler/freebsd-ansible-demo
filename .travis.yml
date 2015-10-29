@@ -1,9 +1,24 @@
----
 language: python
-python: "2.7"
-sudo: false
+python: '2.7'
+sudo: required
 
-addons:
-  apt:
-    packages:
-    - virtualbox
+before_install:
+- sudo apt-get update -qq
+
+install:
+- pip install ansible
+
+before_script:
+- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+- dpkg -x vagrant_1.7.4_x86_64.deb /tmp/vagrant
+- export PATH=${PATH}:/tmp/vagrant/opt/vagrant/bin
+- vagrant plugin install vagrant-aws
+
+script:
+- vagrant up --provider=aws
+- vagrant destroy
+
+env:
+  global:
+    - secure: a6djzDXyErLludVb1xVaIk63gTw4AjqFBW0JMeofjF2L0MScASnkyKEPL7gzyrP6YWWUT0VlTxkMZfDx/lAYUh3uuZRkJnW/txoxJu0E6/jWYcGOZiODw1rXqsJObekXcjZ+/kGy9Fxs9AqkgzW52SQVUJOAnZsI6fzgNTjQ+i4=
+    - secure: Y554K7VMIMD7jqeEyB6YVq2ZXZmy2s5sh04GoXJb6hJlANdqPtK6BjQlIh6VNtFF6F65MDji+fo0rU1k4MnRx9N7/OjNTFg8QpWv0xX2YM3+PQN9b53Shys5xHQek6w6RgQCSU3UQ7dVS9qTwZbwuz1ra/o/9k1ntlzukgFs4Zc=
