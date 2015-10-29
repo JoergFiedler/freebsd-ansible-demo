@@ -4,8 +4,14 @@
   changed_when: false
   register: jail_uuid
 
+- name: Create pkglist file for {{ jail_name }}
+  copy:
+    src: pkglist.txt
+    dest: '{{ iocage_jails_dir }}/pkglist-{{ jail_ip }}.txt'
+  when: not jail_uuid.stdout
+
 - name: Create jail {{ jail_name }}
-  command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }} pkglist={{ iocage_jails_dir }}/pkglist.txt
+  command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }} pkglist={{ iocage_jails_dir }}/pkglisti-{{ jail_ip }}.txt
   when: not jail_uuid.stdout
   notify:
     - start jails

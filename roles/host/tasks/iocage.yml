@@ -23,11 +23,6 @@
   shell: /usr/local/sbin/iocage fetch release="{{ iocage_release_version }}" ftpfiles="base.txz src.txz doc.txz"
   when: release_dir.stat.isdir is undefined
 
-- name: Create pkglist file
-  copy:
-    src: pkglist.txt
-    dest: '{{ iocage_jails_dir }}/pkglist.txt'
-
 - name: Enable iocage service
   service:
     name: iocage
