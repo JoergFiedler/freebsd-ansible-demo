@@ -14,7 +14,7 @@ PROXY_COMMAND = "/usr/bin/ssh -p %p " +
                 "-W %h:22"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "JoergFiedler/freebsd-box"
+  config.vm.box = "murdochjohn/FreeBSD"
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.ssh.insert_key = false
@@ -60,6 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.secret_access_key = ENV['SECRET_ACCESS_KEY']
     aws.ssh_host_attribute = :dns_name
     aws.keypair_name = "ec2-user"
+    aws.region = "eu-west-1"
     aws.user_data = "#!/bin/sh\necho 'pass all keep state' >> /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"awscli sudo bash python27\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1',

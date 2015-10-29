@@ -12,6 +12,7 @@ before_script:
 - vagrant plugin install vagrant-aws
 
 script:
+- vagrant init murdochjohn/FreeBSD
 - vagrant up --provider=aws
 - vagrant destroy
 
