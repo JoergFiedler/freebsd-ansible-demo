@@ -2,5 +2,5 @@
 - hosts: default
   sudo: true
   roles:
-    - jail-host
-    - jail
+    - host
+    - jail-jump
