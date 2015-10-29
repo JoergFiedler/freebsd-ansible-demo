@@ -1,6 +1,0 @@
-host 10.1.*
-  UserKnownHostsFile=/dev/null
-  StrictHostKeyChecking no
-  User vagrant
-  IdentityFile ~/.vagrant.d/insecure_private_key
-  ProxyCommand /usr/bin/ssh -q -o "StrictHostKeyChecking no" -o "UserKnownHostsFile=/dev/null" -p 2222 -i ~/.vagrant.d/insecure_private_key vagrant@localhost -W %h:22
