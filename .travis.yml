@@ -1,19 +1,22 @@
 language: python
 python: '2.7'
 sudo: required
+
 before_install:
 - sudo apt-get update -qq
+
 install:
-- sudo apt-get install -y python-pip
-- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-- dpkg -x vagrant_1.7.4_x86_64.deb ~/opt
-- ~/opt/vagrant/bin/vagrant plugin install vagrant-aws
-- ls -lisa *
 - pip install ansible
+
+before_script:
+- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+- dpkg -x vagrant_1.7.4_x86_64.deb /tmp/opt
+- export PATH=${PATH}:/tmp/opt/vagrant/bin
+- vagrant plugin install vagrant-aws
+
 script:
-- ls -lisa *
-- ./opt/vagrant/bin/vagrant up --provider=aws
-- ./opt/vagrant/bin/vagrant destroy
+- vagrant up --provider=aws
+- vagrant destroy
 
 env:
   global:
