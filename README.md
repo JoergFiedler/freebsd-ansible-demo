@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=travis-integration)](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo)
+[![Build Status](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=master)](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo)
 
 # FreeBSD iocage Ansible
 
