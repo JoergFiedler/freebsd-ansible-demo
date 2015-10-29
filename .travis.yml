@@ -12,7 +12,7 @@ before_script:
 - vagrant plugin install vagrant-aws
 
 script:
-- vagrant init murdochjohn/FreeBSD
+- vagrant box add --name JoergFiedler/freebsd-box metadata.json --provider aws
 - vagrant up --provider=aws
 - test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
 - vagrant destroy

@@ -14,7 +14,7 @@ PROXY_COMMAND = "/usr/bin/ssh -p %p " +
                 "-W %h:22"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "murdochjohn/FreeBSD"
+  config.vm.box = "JoergFiedler/freebsd-box"
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.ssh.insert_key = false
