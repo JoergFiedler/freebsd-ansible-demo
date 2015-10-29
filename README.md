@@ -22,6 +22,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsdd-ansible-demo
+    for provider in aws virtualbox; do vagrant box add --name JoergFiedler/freebsd-box  meta --provider $provider; done
     vagrant up
 
 Login into the jail host.
