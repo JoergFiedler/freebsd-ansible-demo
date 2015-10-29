@@ -1,0 +1,14 @@
+---
+- name: Ensure ZFS is started
+  service: name=zfs
+           enabled=yes
+           state=started
+
+- name: Check if ZFS pool exists
+  command: zpool status {{ iocage_zpool }}
+  register: zpool_status
+  ignore_errors: yes
+
+- name: Create ZFS pool
+  command: zpool create {{ iocage_zpool }} {{ iocage_zpool_devs }}
+  when: "'no such pool' in zpool_status.stderr"

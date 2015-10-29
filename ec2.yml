@@ -1,0 +1,8 @@
+---
+# ec2 specific settings
+
+ssh_user: 'ec2-user'
+ext_ip: "{{ ansible_default_ipv4.address }}"
+ext_if: "{{ ansible_default_ipv4.interface }}"
+iocage_zpool: 'tank' # pool name used for ioc
+iocage_zpool_devs: 'xbd5' # device settings used when creating the pool

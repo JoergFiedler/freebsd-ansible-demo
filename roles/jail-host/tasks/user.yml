@@ -1,0 +1,6 @@
+---
+- name: Add sudo rules for ssh user on jail host
+  template:
+    src: sudoers.user.p2
+    dest: /usr/local/etc/sudoers.d/{{ ssh_user }}
+    validate: 'visudo -cf %s'
