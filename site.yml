@@ -4,3 +4,15 @@
   roles:
     - host
     - jail-jump
+
+  handlers:
+    - name: start jails
+      command: service iocage start
+
+    - name: reload pf
+      service: name=pf
+               state=reloaded
+
+    - name: reload sshd
+      service: name=sshd
+               state=reloaded
