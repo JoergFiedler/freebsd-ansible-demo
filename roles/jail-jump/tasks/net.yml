@@ -11,5 +11,5 @@
 
 - name: Create working resolv.conf for jail
   template:
-    dest: '{{ jail_home.stdout }}/etc/resolv.conf.j2'
-    src: 'resolv.conf'
+    dest: '{{ jail_home.stdout }}/etc/resolv.conf'
+    src: 'resolv.conf.j2'
