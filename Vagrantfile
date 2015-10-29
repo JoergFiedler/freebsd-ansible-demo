@@ -14,16 +14,13 @@ PROXY_COMMAND = "/usr/bin/ssh -p %p " +
                 "-W %h:22"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "FreeBSD10"
+  config.vm.box = "JoergFiedler/freebsd-box"
   config.vm.synced_folder ".", "/vagrant", disabled: true
+
   config.ssh.insert_key = false
 
   config.vm.provider :virtualbox do |vb, override|
     proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@localhost"
-    override.vm.box_url = "https://s3-eu-west-1.amazonaws.com/vastland.moumantai.de/public/FreeBSD/vagrant-box/FreeBSD-10.2-pf-enabled-vagrant-base.box"
-    override.vm.box_download_checksum = "100e0cb5a6c58d197e0e95013bf80b189356ae0f75af2f8e6089d880d8d3cb55"
-    override.vm.box_download_checksum_type = "sha256"
     override.vm.network "private_network", ip: VB_IP, auto_config: false
 
     override.ssh.proxy_command = proxy_command
@@ -46,9 +43,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider :aws do |aws, override|
     proxy_command = "#{PROXY_COMMAND} -o ServerAliveInterval=5 -o ExitOnForwardFailure=yes -o ConnectTimeout=5 #{EC2_SSH_USER}@%h"
-    override.vm.box_url = "https://github.com/JoergFiedler/freebsd-aws-box/raw/master/freebsd10.box"
-    override.vm.box_download_checksum = "ddd"
-    override.vm.box_download_checksum_type = "sha256"
 
     override.ssh.proxy_command = proxy_command
     override.ssh.username = "ec2-user"
