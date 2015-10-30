@@ -16,7 +16,7 @@ script:
 - vagrant box add --name JoergFiedler/freebsd-box metadata.json --provider aws
 - vagrant up --provider=aws
 - test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
-- test $(vagrant provision --provider=aws | tee out.log
+- vagrant provision --provider=aws | tee out.log
 - cat out.log | grep -E "^default\s+:\sok=\d+\s+changed=1" | wc -l) -ge 1
 - vagrant destroy -f
 
