@@ -3,63 +3,31 @@
   template:
     src: 'pf.conf.j2'
     dest: '/etc/pf.conf'
-    mode: 0640
-  notify:
-    - reload pf
-
-- name: Check nat_jails defintion file
-  stat: path=/etc/pf.table.nat-jails
-  register: table_file
-  notify:
-    - reload pf
-
-- name: Check anchor.nat-jail rules defintion file
-  stat: path=/etc/pf.anchor.nat-jail.conf
-  register: anchor_nat_jail
-  notify:
-    - reload pf
-
-- name: Check anchor.rdr-jail rules defintion file
-  stat: path=/etc/pf.anchor.rdr-jail.conf
-  register: anchor_rdr_jail
-  notify:
-    - reload pf
-
-- name: Check anchor.rls-jail rules defintion file
-  stat: path=/etc/pf.anchor.rls-jail.conf
-  register: anchor_rls_jail
+    mode: 0644
   notify:
     - reload pf
 
 - name: Ensure nat jails definition file exists
-  file: path=/etc/pf.table.nat-jails
-        state=touch
-        mode=640
-  when: not table_file.stat.exists
+  command: touch /etc/pf.table.nat-jails
+    creates=/etc/pf.table.nat-jails
   notify:
     - reload pf
 
 - name: Ensure nat jail rules definition file exists
-  file: path=/etc/pf.anchor.nat-jail.conf
-        state=touch
-        mode=640
-  when: not anchor_nat_jail.stat.exists
+  command: touch /etc/pf.anchor.nat-jail.conf
+    creates=/etc/pf.anchor.nat-jail.conf
   notify:
     - reload pf
 
 - name: Ensure rdr jail rules definition file exists
-  file: path=/etc/pf.anchor.rdr-jail.conf
-        state=touch
-        mode=640
-  when: not anchor_rdr_jail.stat.exists
+  command: touch /etc/pf.anchor.rdr-jail.conf
+    creates=/etc/pf.anchor.rdr-jail.conf
   notify:
     - reload pf
 
 - name: Ensure rls jail rules definition file exists
-  file: path=/etc/pf.anchor.rls-jail.conf
-        state=touch
-        mode=640
-  when: not anchor_rls_jail.stat.exists
+  command: touch /etc/pf.anchor.rls-jail.conf
+    creates=/etc/pf.anchor.rls-jail.conf
   notify:
     - reload pf
 
