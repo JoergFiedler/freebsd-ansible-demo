@@ -13,6 +13,7 @@
 - name: Create jail {{ jail_name }}
   command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }} pkglist={{ iocage_jails_dir }}/pkglisti-{{ jail_ip }}.txt
   when: not jail_uuid.stdout
+  register: jail_created
   notify:
     - start jails
 

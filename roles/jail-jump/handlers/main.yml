@@ -1,3 +1,4 @@
 ---
-- name: reload jail sshd
+- name: reload {{ jail_name }} s sshd
   command: iocage exec {{ jail_uuid.stdout }} service sshd reload
+  when: jail_created|success
