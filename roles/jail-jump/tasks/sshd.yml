@@ -21,3 +21,26 @@
     group: '{{ ssh_user }}'
     content: '{{ ssh_pub_key }}'
 
+- name: Make adjustments to sshd (allowed user, port, authentication, ..)
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/ssh/sshd_config'
+    state: 'present'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    insertbefore: '^#Port'
+  with_items:
+  - { regexp: '^Port', line: 'Port {{ sshd_port }}' }
+  - { regexp: '^ListenAddress', line: 'ListenAddress {{ jail_ip }}' }
+  - { regexp: '^Protocol', line: 'Protocol 2' }
+  - { regexp: '^AllowUsers', line: 'AllowUsers {{ ssh_user }}'}
+  - { regexp: '^MaxStartups', line: 'MaxStartups 5:50:10' }
+  - { regexp: '^LoginGraceTime', line: 'LoginGraceTime 30' }
+  - { regexp: '^ChallengeResponseAuthentication',
+      line: 'ChallengeResponseAuthentication no' }
+  - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+  - { regexp: '^UseDNS', line: 'UseDNS no' }
+  - { regexp: '^UsePAM', line: 'UsePAM no' }
+  - { regexp: '^ClientAliveInterval', line: 'ClientAliveInterval 30' }
+  notify:
+    - reload jail sshd
+

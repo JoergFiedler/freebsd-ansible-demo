@@ -1,0 +1,3 @@
+---
+- name: reload jail sshd
+  command: iocage exec {{ jail_uuid.stdout }} service sshd reload
