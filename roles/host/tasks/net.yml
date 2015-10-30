@@ -8,7 +8,7 @@
 
 - name: Add internal ip to jails network interface
   command: ifconfig {{ int_if }} inet alias {{ int_ip }} netmask 255.255.255.255
-  when: internal_ip.changed
+  when: internal_ip|changed
 
 - name: Restrict sshd to machine s internal ip
   lineinfile:

@@ -8,6 +8,7 @@
   command: zpool status {{ iocage_zpool }}
   register: zpool_status
   ignore_errors: yes
+  changed_when: false
 
 - name: Create ZFS pool
   command: zpool create {{ iocage_zpool }} {{ iocage_zpool_devs }}
