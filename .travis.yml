@@ -18,8 +18,8 @@ script:
 - test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
 - vagrant provision | tee /tmp/out.log
 - cat /tmp/out.log
-- cat /tmp/out.log | grep -E "^default\s+:\sok=\d+\s+changed=2"
-- test $(cat out.log | grep -E "^default\s+:\sok=\d+\s+changed=2" | wc -l) -ge 1
+- cat /tmp/out.log | grep "^default\s+:\sok=\d+\s+changed=2"
+- test $(cat out.log | grep "^default\s+:\sok=\d+\s+changed=2" | wc -l) -ge 1
 - vagrant destroy -f
 
 env:
