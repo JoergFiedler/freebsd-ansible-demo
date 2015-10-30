@@ -9,14 +9,19 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 ## Goals
 
 - Ansible playbook that creates a FreeBSD server which hosts multiple jails.
-- No service on the host is externally exposed.
-- All services that accept external connections terminate within a jail.
+- No service on the host is exposed externally.
+- All external connections terminate within a jail.
 - The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
 
 ## Requirements
 
 1. Ansible
 1. VirtualBox
+1. AWS account, with allows you to create and destroy EC2 instances (if you want to use Vagrant's aws provider)
+
+## Notes
+
+The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids are preconfigured. The only thing you have to do is to choose a region `aws.region`.
 
 ## Howto
 
@@ -32,7 +37,9 @@ Login into the jail host.
 ## Next Steps
 
 1. Create other jails (web, dns, mail)
-1. Synchronize Vagrant/Ansible configuration
+1. Setup backup strategy using [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html)
+1. Setup monitoring using datadog.
+1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. So, I would like to create an AMI that only contains a minimal FreeBSD installtion plus the packages required to run Ansible playbooks.
 
 ## Useful Links
 
