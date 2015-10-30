@@ -9,6 +9,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 ## Goals
 
 - Ansible playbook that creates a FreeBSD server which hosts multiple jails.
+- Travis is used to run/test the playbook.
 - No service on the host is exposed externally.
 - All external connections terminate within a jail.
 - The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
@@ -26,7 +27,7 @@ The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids 
 ## Howto
 
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
-    cd freebsdd-ansible-demo
+    cd freebsd-ansible-demo
     for provider in aws virtualbox; do vagrant box add --name JoergFiedler/freebsd-box  meta --provider $provider; done
     vagrant up
 
