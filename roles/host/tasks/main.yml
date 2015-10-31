@@ -1,6 +1,7 @@
 ---
  - include: net.yml tags=net,host
- - include: pf.yml tags=pf,host
+ - include: pf.yml tags=net,host
+ - include: sshd.yml tags=net,host
  - include: zpool.yml
  - include: iocage.yml tags=iocage,host
  - include: user.yml

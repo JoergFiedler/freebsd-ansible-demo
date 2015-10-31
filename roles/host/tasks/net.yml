@@ -10,12 +10,3 @@
   command: ifconfig {{ int_if }} inet alias {{ int_ip }} netmask 255.255.255.255
   when: internal_ip|changed
 
-- name: Restrict sshd to machine s internal ip
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    insertbefore: '^#Port 22'
-    regexp: '^ListenAddress {{ int_ip }}'
-    line: 'ListenAddress {{ int_ip }}'
-  notify:
-    - reload sshd
-
