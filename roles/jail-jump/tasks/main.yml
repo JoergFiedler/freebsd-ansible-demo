@@ -5,3 +5,4 @@
  - include: sshd.yml tags=jump
  - include: user.yml tags=jump
  - include: syslogd.yml tags=jump
+ - include: ssmtp.yml tags=jump

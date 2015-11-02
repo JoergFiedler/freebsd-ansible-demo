@@ -4,3 +4,4 @@
  - include: pf.yml tags=log
  - include: syslogd.yml tags=log
  - include: sshd.yml tags=log
+ - include: ssmtp.yml tags=log
