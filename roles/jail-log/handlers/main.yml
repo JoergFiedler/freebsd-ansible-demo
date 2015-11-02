@@ -1,5 +1,4 @@
 ---
-- name: reload syslogd
-  service: name=syslogd
-           state=reloaded
+- name: reload {{ jail_name }} s syslogd
+  command: iocage exec {{ jail_uuid.stdout }} service syslogd reload
   when: not jail_created|changed
