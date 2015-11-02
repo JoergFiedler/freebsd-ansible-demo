@@ -1,0 +1,27 @@
+---
+- name: Find UUID for {{ jail_name }}
+  shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
+  changed_when: false
+  register: jail_uuid
+
+- name: Create jail {{ jail_name }}
+  command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }}
+  when: not jail_uuid.stdout
+  register: jail_created
+  notify:
+    - start jails
+
+- name: Find UUID for {{ jail_name }}
+  shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
+  changed_when: false
+  register: jail_uuid
+
+- name: Enable jails {{ jail_name }} autostart
+  command: /usr/local/sbin/iocage set boot=on {{ jail_uuid.stdout }}
+  changed_when: false
+
+- name: Register jail s home diretory
+  command: echo {{ iocage_jails_dir }}/{{ jail_uuid.stdout }}/root
+  changed_when: false
+  register: jail_home
+

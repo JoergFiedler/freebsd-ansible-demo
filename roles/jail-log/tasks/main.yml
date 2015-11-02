@@ -1,0 +1,4 @@
+---
+ - include: iocage.yml tags=logserver
+ - include: net.yml tags=logserver
+ - include: pf.yml tags=logserver

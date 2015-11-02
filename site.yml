@@ -3,6 +3,7 @@
   sudo: true
   roles:
     - host
+    - jail-log
     - jail-jump
 
   handlers:

@@ -1,0 +1,15 @@
+---
+- name: Add jail ip to /etc/rc.conf
+  lineinfile:
+    dest: /etc/rc.conf
+    line: "ifconfig_{{ int_if }}_alias{{ jail_ip | ipaddr('int') }}=\"inet {{ jail_ip }} netmask 255.255.255.255\""
+  register: add_ip
+
+- name: Add jail ip to interface
+  command: ifconfig {{ int_if }} inet alias {{ jail_ip }} netmask 255.255.255.255
+  when: add_ip.changed
+
+- name: disable sshd in jail
+  service: name=sshd
+           enabled=false
+

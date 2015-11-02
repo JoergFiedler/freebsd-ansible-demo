@@ -1,0 +1,5 @@
+---
+jail_ip: {{ log_server_ip }}
+jail_ip_addr: '{{ int_if }}|{{ jail_ip }}'
+jail_name: 'log-server'
+
