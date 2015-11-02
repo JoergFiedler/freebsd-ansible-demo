@@ -9,7 +9,3 @@
   command: ifconfig {{ int_if }} inet alias {{ jail_ip }} netmask 255.255.255.255
   when: add_ip.changed
 
-- name: Create working resolv.conf for jail
-  template:
-    dest: '{{ jail_home.stdout }}/etc/resolv.conf'
-    src: 'resolv.conf.j2'
