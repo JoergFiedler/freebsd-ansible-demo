@@ -7,7 +7,7 @@
     line: '{{ item.line }}'
     insertbefore: EOF
   with_items:
-    - { regexp: '^syslogd_enable=', line: 'syslogd_enable=\"NO\"' }
+    - { regexp: '^syslogd_enable=', line: 'syslogd_enable=\"YES\"' }
     - { regexp: '^syslogd_flags=', line: 'syslogd_flags=\"-n -a {{ int_net }} -b {{ jail_ip }}\"' }
   notify:
     - reload syslogd

@@ -2,7 +2,17 @@
 - name: write syslog messages to {{ log_server_ip }}
   lineinfile:
     dest: '{{ jail_home.stdout }}/etc/syslog.conf'
+    regexp: '\@{{ log_server_ip }}'
     line: '*.*      @{{ log_server_ip }}'
     insertafter: '^#\s+Consult the syslog.conf'
   notify:
     - reload syslogd
+
+- name: Enable remote syslog logging
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/rc.conf'
+    regexp: 'syslogd_flags='
+    line: 'syslogd_flags=\"-c -s\"'
+  notify:
+    - reload syslogd
+
