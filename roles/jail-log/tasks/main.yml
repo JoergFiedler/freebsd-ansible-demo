@@ -1,4 +1,6 @@
 ---
- - include: iocage.yml tags=logserver
- - include: net.yml tags=logserver
- - include: pf.yml tags=logserver
+ - include: iocage.yml tags=log
+ - include: net.yml tags=log
+ - include: pf.yml tags=log
+ - include: syslogd.yml tags=log
+ - include: sshd.yml tags=log

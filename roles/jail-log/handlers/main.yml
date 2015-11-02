@@ -1,5 +1,5 @@
 ---
-- name: reload {{ jail_name }} s syslogd
+- name: reload syslogd
   service: name=syslogd
            state=reloaded
   when: not jail_created|changed
