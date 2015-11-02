@@ -1,0 +1,5 @@
+---
+- name: Disable sshd
+  service:
+    name=sshd
+    enabled=false

@@ -1,0 +1,8 @@
+---
+- name: write syslog messages to {{ log_server_ip }}
+  lineinfile:
+    dest: '{{ jail_home.stdout }}/etc/syslog.conf'
+    line: '*.*      @{{ log_server_ip }}'
+    insertafter: '^#\s+Consult the syslog.conf'
+  notify:
+    - reload syslogd
