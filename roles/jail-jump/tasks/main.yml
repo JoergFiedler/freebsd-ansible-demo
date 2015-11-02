@@ -1,6 +1,7 @@
 ---
- - include: iocage.yml
- - include: net.yml
- - include: pf.yml
- - include: sshd.yml
- - include: user.yml
+ - include: iocage.yml tags=jump
+ - include: net.yml tags=jump
+ - include: pf.yml tags=jump
+ - include: sshd.yml tags=jump
+ - include: user.yml tags=jump
+ - include: syslogd.yml tags=jump
