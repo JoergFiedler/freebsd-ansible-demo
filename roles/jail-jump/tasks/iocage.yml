@@ -8,6 +8,8 @@
   command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }}
   when: not jail_uuid.stdout
   register: jail_created
+  notify:
+    - Start all jails with boot=on
 
 - name: Find UUID for {{ jail_name }}
   shell: /usr/local/sbin/iocage show ip4_addr | grep {{ jail_ip }} | cut -d ' ' -f 1
@@ -23,7 +25,4 @@
   changed_when: false
   register: jail_home
 
-- name: Start jail {{ jail_name }}
-  command: service iocage start
-  when: jail_created|changed
 

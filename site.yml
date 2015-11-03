@@ -7,6 +7,9 @@
     - jail-jump
 
   handlers:
+    - name: Start all jails with boot=on
+      command: service iocage start
+
     - name: reload pf
       service: name=pf
                state=reloaded
