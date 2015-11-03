@@ -13,7 +13,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 - No service on the host is exposed externally.
 - All external connections terminate within a jail.
 - The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
-- Playbooks can be reused using Ansible Galaxy
+- Roles can be reused using Ansible Galaxy
 
 ## Requirements
 
