@@ -23,7 +23,7 @@
   changed_when: false
   register: jail_home
 
-- name: start jail {{ jail_name }}
+- name: Start jail {{ jail_name }}
   command: service iocage start
   when: jail_created|changed
 

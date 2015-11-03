@@ -8,7 +8,6 @@
     insertbefore: '^#Port'
   with_items:
   - { regexp: '^Port', line: 'Port {{ sshd_port }}' }
-  - { regexp: '^ListenAddress', line: 'ListenAddress {{ int_ip }}' }
   - { regexp: '^Protocol', line: 'Protocol 2' }
   - { regexp: '^AllowUsers', line: 'AllowUsers {{ ssh_user }}'}
   - { regexp: '^MaxStartups', line: 'MaxStartups 5:50:10' }

@@ -21,7 +21,19 @@
     group: '{{ ssh_user }}'
     content: '{{ ssh_pub_key }}'
 
-- name: Make adjustments to sshd (allowed user, port, authentication, ..)
+- name: adjust host sshd (allowed user, authentication, ..)
+  lineinfile:
+    dest: '/etc/ssh/sshd_config'
+    state: 'present'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    insertafter: '^Port'
+  with_items:
+    - { regexp: '^ListenAddress', line: 'ListenAddress {{ int_ip }}' }
+  notify:
+    - reload sshd
+
+- name: adjust  jails sshd (allowed user, authentication, ..)
   lineinfile:
     dest: '{{ jail_home.stdout }}/etc/ssh/sshd_config'
     state: 'present'
@@ -43,4 +55,8 @@
   - { regexp: '^ClientAliveInterval', line: 'ClientAliveInterval 30' }
   notify:
     - reload {{ jail_name }} s sshd
+
+- name: Start sshd
+  service: name=sshd state=started
+  when: jail_created|changed
 

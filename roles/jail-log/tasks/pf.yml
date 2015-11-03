@@ -22,5 +22,3 @@
   notify:
     - reload pf
 
-- name: Add jail to pf table \'nat_jails\'
-  command: pfctl -t nat_jail -T add {{ jail_ip }}
