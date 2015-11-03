@@ -8,7 +8,7 @@
         jh_net_ext_ip: '{{ ansible_default_ipv4.address }}',
         jh_net_ext_if: '{{ ansible_default_ipv4.interface }}',
         jh_ioc_zpool_name: '{{ iocage_zpool }}',
-        jh_ioc_zpool_devices: '{{ iocage_devs }}' }
+        jh_ioc_zpool_devices: '{{ iocage_zpool_devs }}' }
     - jail-log
     - jail-jump
 
