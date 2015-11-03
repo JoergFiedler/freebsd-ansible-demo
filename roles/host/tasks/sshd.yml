@@ -1,5 +1,5 @@
 ---
-- name: Make adjustments to sshd (allowed user, port, authentication, ..)
+- name: Adjust sshd (allowed user, authentication, ..)
   lineinfile:
     dest: '/etc/ssh/sshd_config'
     state: 'present'
