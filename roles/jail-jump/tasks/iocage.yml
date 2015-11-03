@@ -4,8 +4,8 @@
   changed_when: false
   register: jail_uuid
 
-- name: Create jail {{ jail_name }}
-  command: /usr/local/sbin/iocage create tag={{ jail_name }} ip4_addr={{ jail_ip_addr }}
+- name: Create base jail {{ jail_name }}
+  command: /usr/local/sbin/iocage create -b tag={{ jail_name }} ip4_addr={{ jail_ip_addr }}
   when: not jail_uuid.stdout
   register: jail_created
   notify:
@@ -16,9 +16,12 @@
   changed_when: false
   register: jail_uuid
 
-- name: Enable jails {{ jail_name }} autostart
-  command: /usr/local/sbin/iocage set boot=on {{ jail_uuid.stdout }}
-  changed_when: false
+- name: Set jails {{ jail_name }} properties
+  command: /usr/local/sbin/iocage set {{ item }} {{ jail_uuid.stdout }}
+  with_items:
+    - 'boot=on'
+    - 'hostname={{ jail_hostname }}'
+  when: jail_created|changed
 
 - name: Register jail s home diretory
   command: echo {{ iocage_jails_dir }}/{{ jail_uuid.stdout }}/root
