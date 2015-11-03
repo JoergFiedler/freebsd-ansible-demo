@@ -1,9 +1,0 @@
----
- - include: net.yml tags=host
- - include: pf.yml tags=host
- - include: sshd.yml tags=host
- - include: zpool.yml tags=host
- - include: iocage.yml tags=host
- - include: user.yml tags=host
-# - include: tarsnap.yml tags=host
-

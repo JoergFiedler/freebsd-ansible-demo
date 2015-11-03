@@ -2,7 +2,13 @@
 - hosts: default
   sudo: true
   roles:
-    - host
+    - { role: JoergFiedler.freebsd-jail-host,
+        tags: ['host'],
+        jh_ssh_user: '{{ ssh_user }}',
+        jh_net_ext_ip: '{{ ansible_default_ipv4.address }}',
+        jh_net_ext_if: '{{ ansible_default_ipv4.interface }}',
+        jh_ioc_zpool_name: '{{ iocage_zpool }}',
+        jh_ioc_zpool_devices: '{{ iocage_devs }}' }
     - jail-log
     - jail-jump
 

@@ -7,4 +7,3 @@ ext_if: "{{ ansible_default_ipv4.interface }}"
 iocage_zpool: 'tank' # pool name used for ioc
 iocage_zpool_devs: 'xbd5' # device settings used when creating the pool
 
-dns_server: '172.16.0.23'

@@ -30,7 +30,12 @@ The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids 
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsd-ansible-demo
     for provider in aws virtualbox; do vagrant box add --name JoergFiedler/freebsd-box  metadata.json --provider $provider; done
+    ansible-galaxy install -r roles.txt
     vagrant up
+
+To execute certain roles or get a more detailed output use that command.
+
+     CMD_ANSIBLE_VERBOSE=-vvvv CMD_ANSIBLE_TAGS=host vagrant provision
 
 Login into the jail host.
 
