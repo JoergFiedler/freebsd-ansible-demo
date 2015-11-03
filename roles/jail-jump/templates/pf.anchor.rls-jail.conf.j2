@@ -5,13 +5,6 @@ pass out quick log on {{ int_if }} proto tcp \
   to {{ ext_ip }} port {{ sshd_port }} \
   flags S/SA keep state
 
-# allow ssh connections from jump host to
-# all internal hosts
-pass quick log on {{ int_if }} proto tcp \
-  from {{ jail_ip }} \
-  to {{ int_net }} port {{ sshd_port }} \
-  flags S/SA keep state
-
 # Disable sshd to external interface
 block log proto tcp \
   from any \
