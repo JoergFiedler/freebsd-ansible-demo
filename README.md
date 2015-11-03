@@ -13,6 +13,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 - No service on the host is exposed externally.
 - All external connections terminate within a jail.
 - The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
+- Playbooks can be reused using Ansible Galaxy
 
 ## Requirements
 
@@ -40,6 +41,7 @@ Login into the jail host.
 1. Create other jails (web, dns, mail)
 1. Setup backup strategy using [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html)
 1. Setup monitoring using datadog.
+1. Publish playbook at Ansible Galaxy
 1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. So, I would like to create an AMI that only contains a minimal FreeBSD installation plus the packages required to run Ansible playbooks.
 
 ## Useful Links
