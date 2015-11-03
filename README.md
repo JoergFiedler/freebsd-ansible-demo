@@ -29,7 +29,7 @@ The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids 
 
 Thanks to [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/) nowadays it is very easy to use FreeBSD on EC2.
 
-In order to provision those AMI's with ansible a few things need to be done first. During the initial boot of an instance, the following step are execute using `cloud-init`:
+In order to provision those AMI's with ansible a few things need to be done first. During the initial boot of an instance, the following steps are execute using `cloud-init`:
 
 * activate pf firewall
 * add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service withou loosing the connection
