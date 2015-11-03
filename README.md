@@ -48,9 +48,13 @@ In order to provision those AMI's with ansible a few things need to be done firs
     ansible-galaxy install -r roles.txt
     vagrant up
 
-To execute certain roles or get a more detailed output use that command.
+To execute only certain roles/tasks or get a more detailed output use that command.
 
-     CMD_ANSIBLE_VERBOSE=-vvvv CMD_ANSIBLE_TAGS=host vagrant provision
+    CMD_ANSIBLE_VERBOSE=-vvvv CMD_ANSIBLE_TAGS=host vagrant provision
+
+To run this demo using Amazon EC2 type this.
+
+    ACCESS_KEY={YOUR_KEY} SECRET_ACCESS_KEY={YOUR_SECRET_KEY} vagrant up --provider=aws
 
 Login into the jail host.
 
