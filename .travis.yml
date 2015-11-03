@@ -14,6 +14,7 @@ before_script:
 
 script:
 - vagrant box add --name JoergFiedler/freebsd-box metadata.json --provider aws
+- ansible-galaxy install -r roles.txt
 - vagrant up --provider=aws
 - test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
 - vagrant provision | tee /tmp/out.log
