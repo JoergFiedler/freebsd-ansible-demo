@@ -25,6 +25,21 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 
 The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids are preconfigured. The only thing you have to do is to choose a region `aws.region`.
 
+### FreeBSD AWS Box
+
+Thanks to [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/) nowadays it is very easy to use FreeBSD on EC2.
+
+In order to provision those AMI's with ansible a few things need to be done first. During the initial boot of an instance, the following step are execute using `cloud-init`:
+
+* activate pf firewall
+* add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service withou loosing the connection
+* install the following packages:
+   * awscli
+   * sudo
+   * bash
+   * python27
+* allow passwordless sudo for user `ec2-user`
+
 ## Howto
 
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
