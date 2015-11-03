@@ -12,6 +12,3 @@
   notify:
     - reload {{ jail_name }} s syslogd
 
-- name: Restart syslogd
-  service: name=syslogd state=restarted
-  when: jail_created|changed
