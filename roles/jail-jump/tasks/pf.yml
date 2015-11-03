@@ -37,12 +37,3 @@
   notify:
     - reload pf
 
-- name: Comment pf rule which allows sshd on external interface
-  lineinfile:
-    dest=/etc/pf.conf
-    state=present
-    regexp='^(pass quick.*to \$ext_ip port \$sshd_port.*)$'
-    line='#\1'
-    backrefs=yes
-  notify:
-    - reload pf
