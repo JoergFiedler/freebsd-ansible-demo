@@ -1,5 +1,8 @@
 ---
 - name: Disable sshd
-  service:
-    name=sshd
-    enabled=false
+  lineinfile:
+    dest={{ jail_home.stdout }}/etc/rc.conf
+    state=present
+    regexp='^sshd_enable='
+    line='sshd_enable=\"NO\"'
+
