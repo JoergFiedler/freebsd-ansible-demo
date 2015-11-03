@@ -9,7 +9,3 @@
   command: ifconfig {{ int_if }} inet alias {{ jail_ip }} netmask 255.255.255.255
   when: add_ip.changed
 
-- name: disable sshd in jail
-  service: name=sshd
-           enabled=false
-
