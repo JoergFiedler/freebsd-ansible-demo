@@ -18,7 +18,7 @@ script:
 - vagrant up --provider=aws
 - test $(vagrant ssh -c "which iocage" | grep /usr/local/sbin/iocage |wc -l) -ge 1
 - vagrant provision | tee /tmp/out.log
-- test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=1.*" | wc -l) -ge 1
+- test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=2.*" | wc -l) -ge 1
 - vagrant destroy -f
 
 env:
