@@ -1,1 +1,2 @@
-JoergFiedler.freebsd-jail-host,v1.0.0
+JoergFiedler.freebsd-jail-host
+JoergFiedler.freebsd-jailed-syslogd

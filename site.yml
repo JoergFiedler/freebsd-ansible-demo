@@ -9,7 +9,11 @@
         jh_net_ext_if: '{{ ansible_default_ipv4.interface }}',
         jh_ioc_zpool_name: '{{ iocage_zpool }}',
         jh_ioc_zpool_devices: '{{ iocage_zpool_devs }}' }
-    - jail-log
+    - { role: JoergFiedler.freebsd-jailed-syslogd,
+        tags: ['syslogd'],
+        ssmtp: true,
+        js_jail_name: 'syslogd',
+        js_jail_net_ip: '{{ log_server_ip }}' }
     - jail-jump
 
   handlers:
