@@ -1,8 +1,0 @@
----
- - include: iocage.yml tags=jump
- - include: net.yml tags=jump
- - include: pf.yml tags=jump
- - include: sshd.yml tags=jump
- - include: user.yml tags=jump
- - include: syslogd.yml tags=jump
- - include: ssmtp.yml tags=jump

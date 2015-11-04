@@ -1,9 +1,0 @@
----
-- name: reload {{ jail_name }} s syslogd
-  command: iocage exec {{ jail_uuid.stdout }} service syslogd reload
-  when: not jail_created|changed
-
-- name: reload {{ jail_name }} s sshd
-  command: iocage exec {{ jail_uuid.stdout }} service sshd reload
-  when: not jail_created|changed
-

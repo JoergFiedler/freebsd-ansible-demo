@@ -1,7 +1,0 @@
----
-jail_ip: '10.1.0.2'
-jail_ip_addr: '{{ int_if }}|{{ jail_ip }}'
-jail_name: 'jump-server'
-jail_hostname: '{{ jail_name }}.{{ int_domain }}'
-jail_sshd_port: '{{ sshd_port }}'
-
