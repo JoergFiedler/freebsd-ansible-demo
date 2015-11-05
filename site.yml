@@ -1,29 +1,24 @@
 ---
 - hosts: default
   sudo: true
+
+  vars:
+    host_sshd_user: 'vagrant'
+    host_ioc_release_version: '10.2-RELEASE'
+    syslogd_server: 10.1.0.3
+    ssmtp_forward_address: 'freebsd-ansible-demo@maildrop.cc'
+    ssmtp_forward_mailhub: 'mail.maildrop.cc'
+
   roles:
-  - { role: JoergFiedler.freebsd-jail-host,
-      tags: ['host'],
-      jh_ssh_user: '{{ ssh_user }}',
-      jh_net_ext_ip: '{{ ansible_default_ipv4.address }}',
-      jh_net_ext_if: '{{ ansible_default_ipv4.interface }}',
-      jh_ioc_zpool_name: '{{ iocage_zpool }}',
-      jh_ioc_zpool_devices: '{{ iocage_zpool_devs }}' }
+  - { role: JoergFiedler.freebsd-jail-host }
   - { role: JoergFiedler.freebsd-jailed-syslogd,
       tags: ['syslogd'],
       use_ssmtp: true,
-      js_jail_name: 'syslogd',
-      js_jail_net_ip: '{{ log_server_ip }}' }
+      jail_name: 'syslogd',
+      jail_net_ip: '{{ syslogd_server }}' }
   - { role: JoergFiedler.freebsd-jailed-sshd,
       tags: ['sshd'],
       use_ssmtp: true,
       use_syslogd_server: true,
-      jssh_jail_name: 'sshd',
-      jssh_jail_net_ip: '10.1.0.2',
-      jssh_sshd_user: '{{ ssh_user }}',
-      jssh_sshd_pub_key: '{{ ssh_pub_key }}',
-      jssh_host_net_int_ip: '{{ int_ip }}',
-      jssh_host_net_ext_ip: '{{ ansible_default_ipv4.address }}',
-      jssh_host_net_ext_if: '{{ ext_if }}',
-      jssh_syslogd_server: '{{ log_server_ip }}' }
-
+      jail_name: 'sshd',
+      jail_net_ip: '10.1.0.2' }
