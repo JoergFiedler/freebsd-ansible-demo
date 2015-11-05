@@ -12,8 +12,8 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 - Travis is used to run/test the playbook.
 - No service on the host is exposed externally.
 - All external connections terminate within a jail.
-- The playbook creates the jails as well (examples for nginx/php, postfix, cyrus-imap).
-- Roles can be reused using Ansible Galaxy
+- Roles can be reused using Ansible Galaxy.
+- Combine any of those roles to create FreeBSD server, which perfectly suits you.
 
 ## Requirements
 
@@ -32,7 +32,7 @@ Thanks to [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/) nowadays 
 In order to provision those AMI's with ansible a few things need to be done first. During the initial boot of an instance, the following steps are execute using `cloud-init`:
 
 * activate pf firewall
-* add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service withou loosing the connection
+* add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service without losing the connection
 * install the following packages:
    * awscli
    * sudo
@@ -62,7 +62,7 @@ Login into the jail host.
 
 ## Next Steps
 
-1. Create other jails (web, dns, mail)
+1. Create other jail roles (web, dns, mail)
 1. Role which uses [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html) to backup jail's user data.
 1. Role which uses datadog for server monitoring.
 1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. That's why I like to create an AMI that only contains a minimal FreeBSD installation plus the packages required to run Ansible playbooks.
