@@ -2,4 +2,4 @@
 # ec2 specific settings
 
 host_sshd_user: 'ec2-user'
-iocage_zpool_devs: 'xbd5' # device settings used when creating the pool
+host_ioc_zpool_devices: 'xbd5' # device settings used when creating the pool
