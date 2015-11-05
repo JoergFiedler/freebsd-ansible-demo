@@ -63,9 +63,9 @@ Login into the jail host.
 ## Next Steps
 
 1. Create other jails (web, dns, mail)
-1. Setup backup strategy using [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html)
-1. Setup monitoring using datadog.
-1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. So, I would like to create an AMI that only contains a minimal FreeBSD installation plus the packages required to run Ansible playbooks.
+1. Role which uses [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html) to backup jail's user data.
+1. Role which uses datadog for server monitoring.
+1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. That's why I like to create an AMI that only contains a minimal FreeBSD installation plus the packages required to run Ansible playbooks.
 
 ## Useful Links
 
