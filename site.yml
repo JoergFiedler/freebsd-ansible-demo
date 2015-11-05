@@ -10,7 +10,6 @@
     ssmtp_forward_mailhub: 'mail.maildrop.cc'
 
   roles:
-  - { role: JoergFiedler.freebsd-jail-host }
   - { role: JoergFiedler.freebsd-jailed-syslogd,
       tags: ['syslogd'],
       use_ssmtp: true,
