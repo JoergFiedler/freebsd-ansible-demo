@@ -44,7 +44,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     proxy_command = "#{PROXY_COMMAND} ec2-user@%h"
     override.ssh.proxy_command = proxy_command
     override.ssh.username = "ec2-user"
-    override.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
