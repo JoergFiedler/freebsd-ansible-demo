@@ -3,8 +3,6 @@
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
-VB_SSH_USER = "vagrant"
-EC2_SSH_USER = "ec2-user"
 PROXY_COMMAND = "/usr/bin/ssh -p %p " +
                 "-i ~/.vagrant.d/insecure_private_key " +
                 "-o StrictHostKeyChecking=no " +
@@ -16,15 +14,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "JoergFiedler/freebsd-box"
   config.vm.synced_folder ".", "/vagrant", disabled: true
+
   config.ssh.insert_key = false
 
   config.vm.provider :virtualbox do |vb, override|
-    proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@%h"
+    proxy_command = "#{PROXY_COMMAND} vagrant@%h"
+    override.ssh.proxy_command = proxy_command
 
     override.vm.network "private_network", type: 'dhcp', auto_config: false
-    config.vm.network "forwarded_port", guest: 80, host: 8080
-
-    override.ssh.proxy_command = proxy_command
+    override.vm.network "forwarded_port", guest: 80, host: 8080
 
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
@@ -43,11 +41,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider :aws do |aws, override|
-    proxy_command = "#{PROXY_COMMAND} -o ServerAliveInterval=5 -o ExitOnForwardFailure=yes -o ConnectTimeout=5 #{EC2_SSH_USER}@%h"
-
+    proxy_command = "#{PROXY_COMMAND} ec2-user@%h"
     override.ssh.proxy_command = proxy_command
-    override.ssh.username = "ec2-user"
-    override.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
