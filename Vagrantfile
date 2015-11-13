@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key = false
 
   config.vm.provider :virtualbox do |vb, override|
-    proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@localhost"
+    proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@%h"
 
     override.vm.network "private_network", type: 'dhcp', auto_config: false
 
