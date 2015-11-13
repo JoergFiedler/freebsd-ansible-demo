@@ -14,7 +14,7 @@ PROXY_COMMAND = "/usr/bin/ssh -p %p " +
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "JoergFiedler/freebsd-box"
+  config.vm.box = "FreeBSD Test"
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.ssh.insert_key = false
 
@@ -22,6 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@%h"
 
     override.vm.network "private_network", type: 'dhcp', auto_config: false
+    config.vm.network "forwarded_port", guest: 80, host: 8080
 
     override.ssh.proxy_command = proxy_command
 

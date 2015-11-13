@@ -10,21 +10,26 @@
     ssmtp_forward_mailhub: 'mail.maildrop.cc'
 
   roles:
-  - { role: JoergFiedler.freebsd-jailed-syslogd,
+  - { role: /Users/john/project/freebsd-jails/freebsd-jailed-syslogd,
       tags: ['syslogd'],
       use_ssmtp: true,
       jail_name: 'syslogd',
       jail_net_ip: '{{ syslogd_server }}' }
-  - { role: JoergFiedler.freebsd-jailed-sshd,
+  - { role: /Users/john/project/freebsd-jails/freebsd-jailed-sshd,
       tags: ['sshd'],
       use_ssmtp: true,
       use_syslogd_server: true,
       jail_name: 'sshd',
       jail_net_ip: '10.1.0.2' }
-  - { role: JoergFiedler.freebsd-jailed-mariadb,
+  - { role: /Users/john/project/freebsd-jails/freebsd-jailed-mariadb,
       tags: ['mariadb'],
       use_ssmtp: true,
       use_syslogd_server: true,
       jail_name: 'mariadb',
       jail_net_ip: '10.1.0.4' }
-
+  - { role: /Users/john/project/freebsd-jails/freebsd-jailed-nginx,
+      tags: ['nginx'],
+      use_ssmtp: true,
+      use_syslogd_server: true,
+      jail_name: 'nginx',
+      jail_net_ip: '10.1.0.5' }
