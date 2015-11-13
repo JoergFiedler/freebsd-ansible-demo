@@ -3,7 +3,6 @@
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
-VB_IP = "10.0.2.15"
 VB_SSH_USER = "vagrant"
 EC2_SSH_USER = "ec2-user"
 PROXY_COMMAND = "/usr/bin/ssh -p %p " +
@@ -22,10 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb, override|
     proxy_command = "#{PROXY_COMMAND} #{VB_SSH_USER}@localhost"
 
-    override.vm.network "private_network", ip: VB_IP, auto_config: false
+    override.vm.network "private_network", type: 'dhcp', auto_config: false
 
     override.ssh.proxy_command = proxy_command
-    override.ssh.host = VB_IP
 
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
