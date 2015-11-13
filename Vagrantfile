@@ -33,10 +33,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     vb.gui = false
-    vb.memory = 2048
+    vb.memory = 4096
     vb.cpus = 2
+    vb.name = 'FreeBSD Ansible Demo'
     vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
     vb.customize ["modifyvm", :id, "--audio", "none"]
+    vb.customize ["modifyvm", :id, "--nictype2", "virtio"]
   end
 
   config.vm.provider :aws do |aws, override|
