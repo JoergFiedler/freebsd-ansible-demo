@@ -13,7 +13,7 @@ before_script:
 - vagrant plugin install vagrant-aws
 
 script:
-- vagrant box add --name JoergFiedler/freebsd-box metadata.json --provider aws
+- vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json --provider aws
 - ansible-galaxy install --role-file=roles.txt --roles-path=./roles/
 - vagrant up --provider=aws
 - vagrant provision | tee /tmp/out.log
