@@ -27,9 +27,9 @@
       use_syslogd_server: true,
       jail_name: 'mariadb',
       jail_net_ip: '10.1.0.4' }
-#  - { role: /Users/john/project/freebsd-jails/freebsd-jailed-nginx,
-#      tags: ['nginx'],
-#      use_ssmtp: true,
-#      use_syslogd_server: true,
-#      jail_name: 'nginx',
-#      jail_net_ip: '10.1.0.5' }
+  - { role: JoergFiedler.freebsd-jailed-nginx,
+      tags: ['nginx'],
+      use_ssmtp: true,
+      use_syslogd_server: true,
+      jail_name: 'nginx',
+      jail_net_ip: '10.1.0.5' }
