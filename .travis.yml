@@ -7,14 +7,13 @@ install:
 - pip install netaddr
 
 before_script:
-- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-- dpkg -x vagrant_1.7.4_x86_64.deb /tmp/vagrant
+- wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
+- dpkg -x vagrant_1.8.1_x86_64.deb /tmp/vagrant
 - export PATH=${PATH}:/tmp/vagrant/opt/vagrant/bin
 - vagrant plugin install vagrant-aws
 
 script:
 - vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json --provider aws
-- ansible-galaxy install --role-file=roles.txt --roles-path=./roles/
 - vagrant up --provider=aws
 - vagrant provision | tee /tmp/out.log
 - test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=1.*" | wc -l) -ge 1

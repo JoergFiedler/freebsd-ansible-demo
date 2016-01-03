@@ -17,6 +17,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 
 ## Requirements
 
+1. Vagrant >= 1.8.1
 1. Ansible
 1. VirtualBox
 1. AWS account, with allows you to create and destroy EC2 instances (if you want to use Vagrant's aws provider)
@@ -34,7 +35,6 @@ In order to provision those AMI's with ansible a few things need to be done firs
 * activate pf firewall
 * add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service without losing the connection
 * install the following packages:
-   * awscli
    * sudo
    * bash
    * python27
@@ -45,12 +45,11 @@ In order to provision those AMI's with ansible a few things need to be done firs
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsd-ansible-demo
     for provider in aws virtualbox; do vagrant box add --name JoergFiedler/freebsd-box  metadata.json --provider $provider; done
-    ansible-galaxy install -r roles.txt
     vagrant up
 
 To execute only certain roles/tasks or get a more detailed output use that command.
 
-    CMD_ANSIBLE_VERBOSE=-vvvv CMD_ANSIBLE_TAGS=host vagrant provision
+    ANSIBLE_VERBOSE=-v ANSIBLE_TAGS=host vagrant provision
 
 To run this demo using Amazon EC2 type this.
 
@@ -75,6 +74,7 @@ Login into the jail host.
 1. [unix domain socket too long](https://github.com/ansible/ansible/issues/11536)
 1. [Encrypted Variables](http://docs.travis-ci.com/user/environment-variables/#Encrypted-Variables)
 1. [Strong SSL Security On nginx](https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html)
+1. [ZFS Performance](http://open-zfs.org/wiki/Performance_tuning#LZ4_compression)
 
 ## Powered By
 
