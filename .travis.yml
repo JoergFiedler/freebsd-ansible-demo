@@ -16,7 +16,7 @@ script:
 - vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json --provider aws
 - vagrant up --provider=aws
 - vagrant provision | tee /tmp/out.log
-- test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=1.*" | wc -l) -ge 1
+- test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=2.*" | wc -l) -ge 1
 - hostname=$(vagrant ssh-config|grep HostName |awk '{print $2}')
 - status_code=$(curl -w %{http_code} -o /dev/null -s --insecure https://${hostname})
 - test $status_code -eq 200
