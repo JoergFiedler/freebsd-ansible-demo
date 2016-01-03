@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.galaxy_roles_path = ".roles"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.skip_tags = ENV['ANSIBLE_SKIP_TAGS']
-      ansible.verbose = ENV['ANSBL_VERBOSE']
+      ansible.verbose = ENV['ANSIBLE_VERBOSE']
       ansible.raw_ssh_args = ["-o ProxyCommand='#{proxy_command}'"]
     end
 
@@ -52,8 +52,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
       ansible.extra_vars = "./ec2.yml"
-      ansible.tags = ENV['CMD_ANSIBLE_TAGS']
-      ansible.verbose = ENV['CMD_ANSIBLE_VERBOSE']
+      ansible.galaxy_role_file = "roles.txt"
+      ansible.galaxy_roles_path = ".roles"
+      ansible.tags = ENV['ANSIBLE_TAGS']
+      ansible.skip_tags = ENV['ANSIBLE_SKIP_TAGS']
+      ansible.verbose = ENV['ANSIBLE_VERBOSE']
       ansible.raw_ssh_args = ["-o ProxyCommand='#{proxy_command}'"]
     end
 
