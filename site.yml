@@ -1,6 +1,6 @@
 ---
 - hosts: default
-  sudo: true
+  become: true
 
   vars:
     host_sshd_user: 'vagrant'

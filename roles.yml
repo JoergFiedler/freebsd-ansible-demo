@@ -1,0 +1,13 @@
+---
+- src: JoergFiedler.freebsd-jail-host
+  version: master
+- src: JoergFiedler.freebsd-jailed
+  version: master
+- src: JoergFiedler.freebsd-jailed-syslogd
+  version: master
+- src: JoergFiedler.freebsd-jailed-sshd
+  version: master
+- src: JoergFiedler.freebsd-jailed-mariadb
+  version: master
+- src: JoergFiedler.freebsd-jailed-nginx
+  version: master
