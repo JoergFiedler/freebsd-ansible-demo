@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"
       ansible.extra_vars = "./ec2.yml"
-      ansible.galaxy_role_file = "roles.txt"
+      ansible.galaxy_role_file = "roles.yml"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.skip_tags = ENV['ANSIBLE_SKIP_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
