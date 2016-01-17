@@ -27,9 +27,9 @@
       use_syslogd_server: true,
       jail_name: 'mariadb',
       jail_net_ip: '10.1.0.4' }
-  - { role: JoergFiedler.freebsd-jailed-joomla,
-      tags: ['joomla'],
+  - { role: JoergFiedler.freebsd-jailed-php-fpm,
+      tags: ['php-fpm'],
       use_ssmtp: true,
       use_syslogd_server: true,
-      jail_name: 'joomla',
-      jail_net_ip: '10.1.0.5' }
+      jail_name: 'php-fpm',
+      jail_net_ip: '10.1.0.6' }

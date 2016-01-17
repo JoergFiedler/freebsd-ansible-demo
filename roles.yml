@@ -13,3 +13,5 @@
   version: master
 - src: JoergFiedler.freebsd-jailed-joomla
   version: master
+- src: JoergFiedler.freebsd-jailed-php-fpm
+  version: master
