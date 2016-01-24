@@ -18,9 +18,11 @@ script:
 - vagrant provision | tee /tmp/out.log
 - test $(cat /tmp/out.log | grep -E "^default\s+:\sok=[0-9]+\s+changed=2.*" | wc -l) -ge 1
 - hostname=$(vagrant ssh-config|grep HostName |awk '{print $2}')
+- echo $hostname
 - status_code=$(curl -w %{http_code} -o /dev/null -s --insecure https://${hostname})
+- echo $status_code
 - test $status_code -eq 200
-- vagrant destroy -f
+- echo vagrant destroy -f
 
 env:
   global:
