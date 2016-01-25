@@ -21,7 +21,7 @@ script:
 - echo $hostname
 - status_code=$(curl -w %{http_code} -o /dev/null -s --insecure https://${hostname})
 - echo $status_code
-- test $status_code -eq 200
+- test $status_code -lt 400
 - echo vagrant destroy -f
 
 env:
