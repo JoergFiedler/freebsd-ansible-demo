@@ -13,26 +13,26 @@
     ssmtp_auth_pass: 'mail.maildrop.cc'
 
   roles:
-   - { role: JoergFiedler.freebsd-jailed-syslogd,
-       tags: ['syslogd'],
-       use_ssmtp: true,
-       jail_name: 'syslogd',
-       jail_net_ip: '{{ syslogd_server }}' }
-   - { role: JoergFiedler.freebsd-jailed-sshd,
-       tags: ['sshd'],
-       use_ssmtp: true,
-       use_syslogd_server: true,
-       jail_name: 'sshd',
-       jail_net_ip: '10.1.0.2' }
-   - { role: JoergFiedler.freebsd-jailed-mariadb,
-       tags: ['mariadb'],
-       use_ssmtp: true,
-       use_syslogd_server: true,
-       jail_name: 'mariadb',
-       jail_net_ip: '10.1.0.4' }
-   - { role: JoergFiedler.freebsd-jailed-joomla,
-       tags: ['joomla'],
-       use_ssmtp: true,
-       use_syslogd_server: true,
-       jail_name: 'joomla',
-       jail_net_ip: '10.1.0.7' }
+    - { role: JoergFiedler.freebsd-jailed-syslogd,
+        tags: ['syslogd'],
+        use_ssmtp: true,
+        jail_name: 'syslogd',
+        jail_net_ip: '{{ syslogd_server }}' }
+    - { role: JoergFiedler.freebsd-jailed-sshd,
+        tags: ['sshd'],
+        use_ssmtp: true,
+        use_syslogd_server: true,
+        jail_name: 'sshd',
+        jail_net_ip: '10.1.0.2' }
+    - { role: JoergFiedler.freebsd-jailed-mariadb,
+        tags: ['mariadb'],
+        use_ssmtp: true,
+        use_syslogd_server: true,
+        jail_name: 'mariadb',
+        jail_net_ip: '10.1.0.4' }
+    - { role: JoergFiedler.freebsd-jailed-joomla,
+        tags: ['joomla'],
+        use_ssmtp: true,
+        use_syslogd_server: true,
+        jail_name: 'joomla',
+        jail_net_ip: '10.1.0.7' }
