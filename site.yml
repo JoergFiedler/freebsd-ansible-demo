@@ -14,24 +14,24 @@
 
   roles:
     - { role: JoergFiedler.freebsd-jailed-syslogd,
-        tags: ['syslogd'],
+        tags: ['_syslogd'],
         use_ssmtp: true,
         jail_name: 'syslogd',
         jail_net_ip: '{{ syslogd_server }}' }
     - { role: JoergFiedler.freebsd-jailed-sshd,
-        tags: ['sshd'],
+        tags: ['_sshd'],
         use_ssmtp: true,
         use_syslogd_server: true,
         jail_name: 'sshd',
         jail_net_ip: '10.1.0.2' }
     - { role: JoergFiedler.freebsd-jailed-mariadb,
-        tags: ['mariadb'],
+        tags: ['_mariadb'],
         use_ssmtp: true,
         use_syslogd_server: true,
         jail_name: 'mariadb',
         jail_net_ip: '10.1.0.4' }
-    - { role: JoergFiedler.freebsd-jailed-joomla,
-        tags: ['joomla'],
+    - { role: ../freebsd-jailed-joomla,
+        tags: ['_joomla'],
         use_ssmtp: true,
         use_syslogd_server: true,
         jail_name: 'joomla',
