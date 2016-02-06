@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.network "private_network", type: 'dhcp', auto_config: false
     override.vm.network "forwarded_port", guest: 80, host: 2080
     override.vm.network "forwarded_port", guest: 443, host: 20443
+    override.vm.network "forwarded_port", guest: 10022, host: 10022
 
     override.vm.provision "ansible" do |ansible|
       ansible.playbook = "site.yml"

@@ -15,3 +15,5 @@
   version: master
 - src: JoergFiedler.freebsd-jailed-php-fpm
   version: master
+- src: JoergFiedler.freebsd-jailed-sftp
+  version: master
