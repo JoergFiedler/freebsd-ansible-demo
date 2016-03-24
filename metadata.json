@@ -1,0 +1,19 @@
+{
+  "name": "JoergFiedler/freebsd-box",
+  "description": "This box contains FreeBSD for VB and AWS providers.",
+  "versions": [{
+    "version": "0.4.1",
+    "providers": [{
+      "name": "virtualbox",
+      "url": "http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-10.2-vagrant-abe25b9.box",
+      "checksum_type": "sha256",
+      "checksum": "abe25b9b2b934053a624632323f7c62c1fe6dce0fd7453fb484cc2aba17f4056"
+    },
+    {
+      "name": "aws",
+      "url": "https://rawgit.com/JoergFiedler/freebsd-box/master/freebsd10-aws.box",
+      "checksum_type": "sha256",
+      "checksum": "5c5ff54810467e621209afe4cff8bfe8905ccd547e92bb43c13fbc9d631296d3"
+    }]
+  }]
+}
