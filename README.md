@@ -52,6 +52,8 @@ In order to provision those AMI's with ansible a few things need to be done firs
 To execute only certain roles/tasks or get a more detailed output use that command.
 
     ANSIBLE_VERBOSE=-v ANSIBLE_TAGS=host vagrant provision
+    
+Note: Using tags only works after you run the complete playbook. They are intended to update specific jails later on.  
 
 To run this demo using Amazon EC2 type this.
 
