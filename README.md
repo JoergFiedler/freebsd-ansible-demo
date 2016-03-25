@@ -44,7 +44,9 @@ In order to provision those AMI's with ansible a few things need to be done firs
 
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsd-ansible-demo
-    for provider in aws virtualbox; do vagrant box add --name JoergFiedler/freebsd-box  metadata.json --provider $provider; done
+    for provider in aws virtualbox; do \
+      vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json  --provider $provider; \
+    done
     vagrant up
 
 To execute only certain roles/tasks or get a more detailed output use that command.
