@@ -22,6 +22,23 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 1. VirtualBox
 1. AWS account, with allows you to create and destroy EC2 instances (if you want to use Vagrant's aws provider)
 
+### Ansible Roles
+
+The following roles are also available.
+
+ 1. [freebsd-build-server - Creates a FreeBSD build server (poudriere)]((https://galaxy.ansible.com/JoergFiedler/freebsd-build-server/))
+ 1. [freebsd-jail-host - FreeBSD Jail host](https://galaxy.ansible.com/JoergFiedler/freebsd-jail-host/)
+ 1. [freebsd-jailed - Provides a jail](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed/)
+ 1. [freebsd-jailed-nginx - Provides a jailed nginx server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-nginx/)
+ 1. [freebsd-jailed-php-fpm - Creates a php-fpm pool and a ZFS dataset which is used as web root by php-fpm](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-php-fpm/)
+ 1. [freebsd-jailed-sftp - Installs a SFTP server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sftp/)
+ 1. [freebsd-jailed-sshd - Provides a jailed sshd server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sshd/)
+ 1. [freebsd-jailed-syslogd - Provides a jailed syslogd  1. [freebsd-jailed-btsync - Provides a jailed btsync instance server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-btsync/)
+ 1. [freebsd-jailed-joomla - Installs Joomla](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-joomla/)
+ 1. [freebsd-jailed-mariadb - Provides a jailed MariaDB server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-mariadb/)
+server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-syslogd/)
+ 1. [freebsd-jailed-wordpress - Provides a jailed Wordpress server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-wordpress/)
+
 ## Notes
 
 The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids are preconfigured. The only thing you have to do is to choose a region `aws.region`.
