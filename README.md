@@ -33,10 +33,10 @@ The following roles are also available.
  1. [freebsd-jailed-php-fpm - Creates a php-fpm pool and a ZFS dataset which is used as web root by php-fpm](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-php-fpm/)
  1. [freebsd-jailed-sftp - Installs a SFTP server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sftp/)
  1. [freebsd-jailed-sshd - Provides a jailed sshd server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sshd/)
- 1. [freebsd-jailed-syslogd - Provides a jailed syslogd  1. [freebsd-jailed-btsync - Provides a jailed btsync instance server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-btsync/)
+ 1. [freebsd-jailed-syslogd - Provides a jailed syslogd](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-syslogd/)
+ 1. [freebsd-jailed-btsync - Provides a jailed btsync instance server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-btsync/)
  1. [freebsd-jailed-joomla - Installs Joomla](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-joomla/)
  1. [freebsd-jailed-mariadb - Provides a jailed MariaDB server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-mariadb/)
-server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-syslogd/)
  1. [freebsd-jailed-wordpress - Provides a jailed Wordpress server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-wordpress/)
 
 ## Notes
