@@ -26,7 +26,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 
 The following roles are also available.
 
- 1. [freebsd-build-server - Creates a FreeBSD poudriere build server]((https://galaxy.ansible.com/JoergFiedler/freebsd-build-server/))
+ 1. [freebsd-build-server - Creates a FreeBSD poudriere build server](https://galaxy.ansible.com/JoergFiedler/freebsd-build-server/)
  1. [freebsd-jail-host - FreeBSD Jail host](https://galaxy.ansible.com/JoergFiedler/freebsd-jail-host/)
  1. [freebsd-jailed - Provides a jail](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed/)
  1. [freebsd-jailed-nginx - Provides a jailed nginx server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-nginx/)
