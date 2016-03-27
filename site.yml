@@ -11,6 +11,7 @@
     ssmtp_mailhub: 'mail.maildrop.cc'
     ssmtp_auth_user: 'mail.maildrop.cc'
     ssmtp_auth_pass: 'mail.maildrop.cc'
+    mariadb_root_passwd: 'password'
 
   roles:
     - { role: JoergFiedler.freebsd-jailed-syslogd,
@@ -30,9 +31,25 @@
         use_syslogd_server: true,
         jail_name: 'mariadb',
         jail_net_ip: '10.1.0.4' }
-    - { role: JoergFiedler.freebsd-jailed-joomla,
-        tags: ['_joomla'],
-        use_ssmtp: true,
-        use_syslogd_server: true,
-        jail_name: 'joomla',
-        jail_net_ip: '10.1.0.7' }
+    - { role: JoergFiedler.freebsd-jailed-nginx,
+        tags: ['_proxy'],
+        nginx_servers: [
+          {
+            name: 'localhost',
+            proxy: { host: '10.1.0.100' },
+            force_redirect: true,
+            https: { ocsp_server: 'ocsp.startssl.com' }
+          }
+        ],
+        jail_name: 'proxy',
+        jail_net_ip: '10.1.0.100' }
+    - { role: JoergFiedler.freebsd-jailed-wordpress,
+        tags: ['_wordpress'],
+        server_name: 'localhost',
+        nginx_pf_rdrs: [],
+        wp_db_password: 'wordpress',
+        wp_db_name: 'wordpress',
+        jail_name: 'wordpress',
+        wp_db_host_password: '{{ mariadb_root_passwd }}',
+        sftp_port: 40200,
+        jail_net_ip: '10.1.0.100' }

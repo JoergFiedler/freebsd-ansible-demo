@@ -17,3 +17,5 @@
   version: master
 - src: JoergFiedler.freebsd-jailed-sftp
   version: master
+- src: JoergFiedler.freebsd-jailed-wordpress
+  version: master
