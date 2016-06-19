@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=master)](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo)
 
+### Warning
+
+It seems there are [issues](https://github.com/ansible/ansible/issues/16320) with version 2.1 of Ansible regarding how variables are resolved for roles and their dependend roles. Until those are resolved the only supported version of Ansible for the roles mentioned in this demo is **2.0.1**.
+
 # FreeBSD iocage Ansible
 
 How to use Ansible and iocage to set up a FreeBSD jail server.
@@ -18,7 +22,7 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 ## Requirements
 
 1. Vagrant >= 1.8.1
-1. Ansible
+1. Ansible == 2.0.1
 1. VirtualBox
 1. AWS account, with allows you to create and destroy EC2 instances (if you want to use Vagrant's aws provider)
 
