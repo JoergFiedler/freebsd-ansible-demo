@@ -3,7 +3,7 @@ python: '2.7'
 sudo: false
 
 install:
-- pip install ansible
+- pip install ansible==2.0.1
 - pip install netaddr
 
 before_script:
