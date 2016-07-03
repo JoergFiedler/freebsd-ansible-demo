@@ -22,5 +22,5 @@ script:
 
 env:
   global:
-    - secure: a6djzDXyErLludVb1xVaIk63gTw4AjqFBW0JMeofjF2L0MScASnkyKEPL7gzyrP6YWWUT0VlTxkMZfDx/lAYUh3uuZRkJnW/txoxJu0E6/jWYcGOZiODw1rXqsJObekXcjZ+/kGy9Fxs9AqkgzW52SQVUJOAnZsI6fzgNTjQ+i4=
-    - secure: Y554K7VMIMD7jqeEyB6YVq2ZXZmy2s5sh04GoXJb6hJlANdqPtK6BjQlIh6VNtFF6F65MDji+fo0rU1k4MnRx9N7/OjNTFg8QpWv0xX2YM3+PQN9b53Shys5xHQek6w6RgQCSU3UQ7dVS9qTwZbwuz1ra/o/9k1ntlzukgFs4Zc=
+  - secure: dWeukGEntjLZC9KRc4gwRcvQRfL7XBG8Q+WBCEsxdWCbBq2iyzK/Kd1ZvlGA+7ViSg0Q8Hfgy4/56eyYqehD10RL79Q3B9f7sv39KqcEHEFqdev4Aegc1eA3XUpiSRPf8QhtI1e2L1J3PNV7yeDUp5wVonUEAaFaHn0EJnLjEMk=
+  - secure: A5PSIhejokIRqzYocw9pVgnfjJ1g0n5zfWjxrh/mZk/Ebbs1MwKeVsgqjWHpHuxhmunZJVMCbEAL3etP4IG7W8BPUyfT0YyG4JaTGpdwV1dK9Vff6Zs1aYOSEQ6NJtSJFCHmK8rsy7WRUjsrtT4uynLQuig0B6x7lOuEQthmT5g=
