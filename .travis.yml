@@ -16,6 +16,7 @@ script:
 - vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json --provider aws
 - vagrant up --provider aws
 - btsync_host=$(vagrant ssh-config btsync |grep HostName |awk '{print $2}')
+- echo ${btsync_host}
 - http_status=$(curl -u admin:admin https://${btsync_host}:20202/gui/ --insecure -w %{http_code} -o /dev/null -s)
 - [[ $http_status -eq 200 ]]
 
