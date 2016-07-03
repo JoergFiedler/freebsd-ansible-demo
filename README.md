@@ -63,22 +63,32 @@ In order to provision those AMI's with ansible a few things need to be done firs
 
 ## Howto
 
+The following machines are configured (replace MACHINE with one of those names):
+
+* btsync
+
+### Start machines using VirtualBox
+
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsd-ansible-demo
     for provider in aws virtualbox; do \
       vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json  --provider $provider; \
     done
-    vagrant up
+    vagrant up MACHINE_NAME
 
-To execute only certain roles/tasks or get a more detailed output use that command.
+### Start machines using EC2
 
-    ANSIBLE_VERBOSE=-v ANSIBLE_TAGS=host vagrant provision
-    
-Note: Tags only works after you run the complete playbook. They are intended to update specific jails later on.  
+    AWS_ACCESS_KEY_ID={YOUR_KEY} AWS_SECRET_ACCESS_KEY={YOUR_SECRET_KEY} \
+    vagrant up MACHINE_NAME --provider =aws
 
-To run this demo using Amazon EC2 type this.
+Note: Make sure your default security group allows incoming traffic to the following ports:
 
-    ACCESS_KEY={YOUR_KEY} SECRET_ACCESS_KEY={YOUR_SECRET_KEY} vagrant up --provider=aws
+* http
+* https
+* TCP 20202 (btsync)
+* UDP 10202 (btsync)
+
+### Login
 
 Login into the jail host.
 
