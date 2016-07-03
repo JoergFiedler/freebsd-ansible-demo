@@ -18,6 +18,8 @@ script:
 - btsync_host=$(vagrant ssh-config btsync |grep HostName |awk '{print $2}')
 - http_status=$(curl -u admin:admin https://${btsync_host}:20202/gui/ --insecure -w %{http_code} -o /dev/null -s)
 - [[ $http_status -eq 200 ]]
+
+after_script:
 - vagrant destroy -f
 
 env:
