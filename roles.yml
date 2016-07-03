@@ -1,14 +1,14 @@
 ---
 - src: JoergFiedler.freebsd-jail-host
-  version: 1.0.0
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed
-  version: 1.0.0
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-syslogd
-  version: 1.0.0
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-sshd
-  version: 1.0.0
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-btsync
-  version: 1.0.0
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-mariadb
   version: master
 - src: JoergFiedler.freebsd-jailed-nginx
