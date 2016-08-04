@@ -1,5 +1,5 @@
 ---
-- hosts: joomla
+- hosts: fpm-multi-host
   become: true
 
   vars:
@@ -28,7 +28,7 @@
     - { role: JoergFiedler.freebsd-jailed-mariadb,
         tags: ['_mariadb'],
         jail_name: 'mariadb',
-        jail_net_ip: '10.1.0.3' }
+        jail_net_ip: '10.1.0.4' }
 #    - { role: JoergFiedler.freebsd-jailed-joomla,
 #        tags: ['_joomla'],
 #        joomla_db_host_password: '{{ mariadb_root_passwd }}',

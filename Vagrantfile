@@ -36,13 +36,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define 'joomla' do |btsync|
     btsync.vm.provision 'ansible', type: 'ansible'  do |ansible|
-      ansible.playbook = './playbook/joomla.yml'
+      ansible.playbook = './playbook/fpm-multi-host.yml'
     end
   end
 
   config.vm.provision 'ansible', type: 'ansible' do |ansible|
       ansible.galaxy_roles_path = ENV['ANSIBLE_ROLES_PATH'] || './roles'
-      ansible.galaxy_role_file = './roles.yml'
+#      ansible.galaxy_role_file = './roles.yml'
       ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}'
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.skip_tags = ENV['ANSIBLE_SKIP_TAGS']

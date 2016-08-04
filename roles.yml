@@ -10,7 +10,7 @@
 - src: JoergFiedler.freebsd-jailed-btsync
   version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-mariadb
-  version: master
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-nginx
   version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-joomla
