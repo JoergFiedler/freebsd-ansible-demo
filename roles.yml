@@ -12,7 +12,7 @@
 - src: JoergFiedler.freebsd-jailed-mariadb
   version: master
 - src: JoergFiedler.freebsd-jailed-nginx
-  version: master
+  version: v1.0.0
 - src: JoergFiedler.freebsd-jailed-joomla
   version: master
 - src: JoergFiedler.freebsd-jailed-php-fpm
