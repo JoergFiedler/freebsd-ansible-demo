@@ -18,25 +18,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define 'btsync' do |btsync|
     btsync.vm.provision 'ansible', type: 'ansible'  do |ansible|
-      ansible.playbook = './btsync.yml'
+      ansible.playbook = './playbook/btsync.yml'
     end
   end
 
   config.vm.define 'nginx-single-host' do |single|
     single.vm.provision 'ansible', type: 'ansible'  do |ansible|
-      ansible.playbook = './nginx-single-host.yml'
+      ansible.playbook = './playbook/nginx-single-host.yml'
     end
   end
 
   config.vm.define 'nginx-multi-host' do |multi|
     multi.vm.provision 'ansible', type: 'ansible'  do |ansible|
-      ansible.playbook = './nginx-multi-host.yml'
+      ansible.playbook = './playbook/nginx-multi-host.yml'
     end
   end
 
   config.vm.define 'joomla' do |btsync|
     btsync.vm.provision 'ansible', type: 'ansible'  do |ansible|
-      ansible.playbook = './joomla.yml'
+      ansible.playbook = './playbook/joomla.yml'
     end
   end
 

@@ -1,0 +1,36 @@
+---
+- hosts: joomla
+  become: true
+
+  vars:
+    host_sshd_user: 'vagrant'
+    host_ioc_release_version: '10.2-RELEASE'
+    syslogd_server: 10.1.0.3
+    ssmtp_root: 'freebsd-ansible-demo'
+    ssmtp_rewrite_domain: 'maildrop.cc'
+    ssmtp_mailhub: 'mail.maildrop.cc'
+    ssmtp_auth_user: 'mail.maildrop.cc'
+    ssmtp_auth_pass: 'mail.maildrop.cc'
+    mariadb_root_passwd: 'password'
+
+  roles:
+    - { role: JoergFiedler.freebsd-jailed-syslogd,
+        tags: ['_syslogd'],
+        use_ssmtp: true,
+        jail_name: 'syslogd',
+        jail_net_ip: '{{ syslogd_server }}' }
+    - { role: JoergFiedler.freebsd-jailed-sshd,
+        tags: ['_sshd'],
+        use_ssmtp: true,
+        use_syslogd_server: true,
+        jail_name: 'sshd',
+        jail_net_ip: '10.1.0.2' }
+    - { role: JoergFiedler.freebsd-jailed-mariadb,
+        tags: ['_mariadb'],
+        jail_name: 'mariadb',
+        jail_net_ip: '10.1.0.3' }
+#    - { role: JoergFiedler.freebsd-jailed-joomla,
+#        tags: ['_joomla'],
+#        joomla_db_host_password: '{{ mariadb_root_passwd }}',
+#        jail_name: 'joomla',
+#        jail_net_ip: '10.1.0.4' }
