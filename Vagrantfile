@@ -34,14 +34,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define 'joomla' do |btsync|
+  config.vm.define 'fpm-multi-host' do |btsync|
     btsync.vm.provision 'ansible', type: 'ansible'  do |ansible|
       ansible.playbook = './playbook/fpm-multi-host.yml'
     end
   end
 
   config.vm.provision 'ansible', type: 'ansible' do |ansible|
-      ansible.galaxy_roles_path = ENV['ANSIBLE_ROLES_PATH'] || './roles'
+      ansible.galaxy_roles_path = ENV['ANSIBLE_ROLES_PATH'] || './playbook/roles'
 #      ansible.galaxy_role_file = './roles.yml'
       ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}'
       ansible.tags = ENV['ANSIBLE_TAGS']
@@ -60,8 +60,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network 'private_network', type: 'dhcp', auto_config: false
     config.vm.network 'forwarded_port', guest: 80, host: 2080
     config.vm.network 'forwarded_port', guest: 443, host: 20443
-    config.vm.network 'forwarded_port', guest: 10022, host: 10022
-    config.vm.network 'forwarded_port', guest: 10023, host: 10023
+    config.vm.network 'forwarded_port', guest: 10200, host: 10200
+    config.vm.network 'forwarded_port', guest: 10201, host: 10201
 
     vb.gui = false
     vb.memory = 4096
