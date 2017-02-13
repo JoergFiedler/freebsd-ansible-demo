@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=master)](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo)
 
+# This project is currently broken … sorry for any inconvenience
+
 ### Warning
 
 It seems there are [issues](https://github.com/ansible/ansible/issues/16320) with version 2.1 of Ansible regarding how variables are resolved for roles and their dependend roles. Until those are resolved the only supported version of Ansible for the roles mentioned in this demo is **2.0.1**.
