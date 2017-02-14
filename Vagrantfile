@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network 'private_network', type: 'dhcp', auto_config: false
     config.vm.network 'forwarded_port', guest: 80, host: 10080
     config.vm.network 'forwarded_port', guest: 443, host: 10443
-    config.vm.network 'forwarded_port', guest: 10101, host: 10101
+    config.vm.network 'forwarded_port', guest: 10100, host: 10100
 
     vb.gui = false
     vb.memory = 4096
