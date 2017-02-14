@@ -1,14 +1,15 @@
 [![Build Status](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo.svg?branch=master)](https://travis-ci.org/JoergFiedler/freebsd-ansible-demo)
 
-# This project is currently broken … sorry for any inconvenience
+# Ansible Versions
 
-### Warning
+Supported Ansible versions:
+- = 2.0.1.0 - tested
+- = 2.1.1.0 - works
+- = 2.2.0.0 and later - broken 
 
-It seems there are [issues](https://github.com/ansible/ansible/issues/16320) with version 2.1 of Ansible regarding how variables are resolved for roles and their dependend roles. Until those are resolved the only supported version of Ansible for the roles mentioned in this demo is **2.0.1**.
+# FreeBSD, iocage and Ansible
 
-# FreeBSD iocage Ansible
-
-How to use Ansible and iocage to set up a FreeBSD jail server.
+How to use Ansible and iocage to set up a FreeBSD btsync server.
 
 ![Big Picture](https://github.com/JoergFiedler/freebsd-ansible-demo/raw/master/doc/big-picture-draw.io.png)
 
@@ -26,18 +27,15 @@ How to use Ansible and iocage to set up a FreeBSD jail server.
 1. Vagrant >= 1.8.1
 1. Ansible == 2.0.1
 1. VirtualBox
-1. AWS account, with allows you to create and destroy EC2 instances (if you want to use Vagrant's aws provider)
 
 ### Ansible Roles
 
-The following roles are also available.
+The following roles are available.
 
  1. [freebsd-build-server - Creates a FreeBSD poudriere build server](https://galaxy.ansible.com/JoergFiedler/freebsd-build-server/)
  1. [freebsd-jail-host - FreeBSD Jail host](https://galaxy.ansible.com/JoergFiedler/freebsd-jail-host/)
  1. [freebsd-jailed - Provides a jail](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed/)
  1. [freebsd-jailed-nginx - Provides a jailed nginx server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-nginx/)
- 1. [freebsd-jailed-php-fpm - Creates a php-fpm pool and a ZFS dataset which is used as web root by php-fpm](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-php-fpm/)
- 1. [freebsd-jailed-sftp - Installs a SFTP server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sftp/)
  1. [freebsd-jailed-sshd - Provides a jailed sshd server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-sshd/)
  1. [freebsd-jailed-syslogd - Provides a jailed syslogd](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-syslogd/)
  1. [freebsd-jailed-btsync - Provides a jailed btsync instance server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-btsync/)
@@ -45,25 +43,7 @@ The following roles are also available.
  1. [freebsd-jailed-mariadb - Provides a jailed MariaDB server](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-mariadb/)
  1. [freebsd-jailed-wordpress - Provides a jailed Wordpress server.](https://galaxy.ansible.com/JoergFiedler/freebsd-jailed-wordpress/)
 
-## Notes
-
-The box file `metadata.json` provides a box for VirtualBox and AWS. The AMI ids are preconfigured. The only thing you have to do is to choose a region `aws.region`.
-
-### FreeBSD AWS Box
-
-Thanks to [FreeBSD on EC2](http://www.daemonology.net/freebsd-on-ec2/) nowadays it is very easy to use FreeBSD on EC2.
-
-In order to provision those AMI's with ansible a few things need to be done first. During the initial boot of an instance, the following steps are execute using `cloud-init`:
-
-* activate pf firewall
-* add a `pass all keep state` rule to pf to keep track of connection states, which in turn allows you to reload the pf service without losing the connection
-* install the following packages:
-   * sudo
-   * bash
-   * python27
-* allow passwordless sudo for user `ec2-user`
-
-## Howto
+## HowTo
 
 The following machines are configured (replace MACHINE with one of those names):
 
@@ -74,34 +54,23 @@ The following machines are configured (replace MACHINE with one of those names):
     git clone https://github.com/JoergFiedler/freebsd-ansible-demo.git
     cd freebsd-ansible-demo
     for provider in aws virtualbox; do \
-      vagrant box add https://rawgit.com/JoergFiedler/freebsd-box/master/metadata.json  --provider $provider; \
+      vagrant box add \
+        --provider ${provider} \
+        https://rawgit.com/JoergFiedler/freebsd-box/freebsd-11.0/metadata.json; \
     done
-    vagrant up MACHINE_NAME
+    vagrant up btsync
 
-### Start machines using EC2
-
-    AWS_ACCESS_KEY_ID={YOUR_KEY} AWS_SECRET_ACCESS_KEY={YOUR_SECRET_KEY} \
-    vagrant up MACHINE_NAME --provider =aws
-
-Note: Make sure your default security group allows incoming traffic to the following ports:
-
-* http
-* https
-* TCP 20202 (btsync)
-* UDP 10202 (btsync)
-
-### Login
-
-Login into the jail host.
-
-    vagrant ssh
+You should now be able to access btsync webui using https://localhost:10443 with
+user `admin` and password `admin`.
 
 ## Next Steps
 
-1. Create other jail roles (~~web~~, dns, mail)
+1. Create other jail roles (~~nginx~~, ~~wordpress~~, mail)
 1. ~~Role which uses [Tarsnap](https://www.tarsnap.com/man-tarsnap.1.html) to backup jail's user data.~~
-1. Role which uses datadog for server monitoring.
-1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/). I would prefer to use a more stripped down FreeBSD installation. That's why I like to create an AMI that only contains a minimal FreeBSD installation plus the packages required to run Ansible playbooks.
+1. The AMI's used come from [here](http://www.daemonology.net/freebsd-on-ec2/).
+   I would prefer to use a more stripped down FreeBSD installation. That's why 
+   I like to create an AMI that only contains a minimal FreeBSD installation 
+   plus the packages required to run Ansible playbooks.
 
 ## Useful Links
 

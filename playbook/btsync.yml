@@ -1,33 +1,53 @@
 ---
-- hosts: btsync
+- hosts: all
   become: true
 
   vars:
+    host_build_server_url: 'http://vastland.moumantai.de/FreeBSD/packages/freebsd-11_0_x64-HEAD'
+    host_ioc_release_version: '11.0-RELEASE'
+    host_sshd_authorized_keys_file: '~/.vagrant.d/insecure_private_key.pub'
     host_sshd_user: 'vagrant'
-    host_ioc_release_version: '10.2-RELEASE'
-    syslogd_server: 10.1.0.3
-    ssmtp_root: 'freebsd-ansible-demo'
-    ssmtp_rewrite_domain: 'maildrop.cc'
-    ssmtp_mailhub: 'mail.maildrop.cc'
-    ssmtp_auth_user: 'mail.maildrop.cc'
+
+    syslogd_server: '10.1.0.3'
+
     ssmtp_auth_pass: 'mail.maildrop.cc'
-    mariadb_root_passwd: 'password'
+    ssmtp_auth_user: 'mail.maildrop.cc'
+    ssmtp_mailhub: 'mail.maildrop.cc'
+    ssmtp_rewrite_domain: 'maildrop.cc'
+    ssmtp_root: 'freebsd-ansible-demo'
+
+    use_syslogd_server: true,
+    use_ssmtp: true,
+
+    ansible_python_interpreter: '/usr/local/bin/python2.7'
 
   roles:
     - { role: JoergFiedler.freebsd-jailed-syslogd,
         tags: ['_syslogd'],
-        use_ssmtp: true,
         jail_name: 'syslogd',
+        use_syslogd_server: false,
         jail_net_ip: '{{ syslogd_server }}' }
     - { role: JoergFiedler.freebsd-jailed-sshd,
         tags: ['_sshd'],
-        use_ssmtp: true,
-        use_syslogd_server: true,
+        sshd_jump_host: true,
         jail_name: 'sshd',
         jail_net_ip: '10.1.0.2' }
+    - { role: JoergFiedler.freebsd-jailed-nginx,
+        tags: ['_proxy'],
+        nginx_pf_redirect: true,
+        nginx_servers: [
+          {
+            name: 'localhost',
+            default: true,
+            proxy: { host: '10.1.0.200', port: '10080' },
+            https: {
+              enabled: true
+            }
+          }
+        ],
+        jail_name: 'proxy',
+        jail_net_ip: '10.1.0.100' }
     - { role: JoergFiedler.freebsd-jailed-btsync,
-        tags: ['btsync'],
-        use_ssmtp: true,
-        use_syslogd_server: true,
+        tags: ['_btsync'],
         jail_name: 'btsync',
-        jail_net_ip: '10.1.0.3' }
+        jail_net_ip: '10.1.0.200' }

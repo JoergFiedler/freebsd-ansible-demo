@@ -1,23 +1,13 @@
 ---
 - src: JoergFiedler.freebsd-jail-host
-  version: v1.0.0
+  version: master
 - src: JoergFiedler.freebsd-jailed
-  version: v1.0.0
+  version: master
 - src: JoergFiedler.freebsd-jailed-syslogd
-  version: v1.0.0
+  version: master
 - src: JoergFiedler.freebsd-jailed-sshd
-  version: v1.0.0
+  version: master
 - src: JoergFiedler.freebsd-jailed-btsync
-  version: v1.0.0
-- src: JoergFiedler.freebsd-jailed-mariadb
-  version: v1.0.0
+  version: master
 - src: JoergFiedler.freebsd-jailed-nginx
-  version: v1.0.0
-- src: JoergFiedler.freebsd-jailed-joomla
-  version: master
-- src: JoergFiedler.freebsd-jailed-php-fpm
-  version: master
-- src: JoergFiedler.freebsd-jailed-sftp
-  version: master
-- src: JoergFiedler.freebsd-jailed-wordpress
   version: master

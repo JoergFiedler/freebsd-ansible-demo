@@ -1,9 +1,0 @@
-[default]
-ansible_ssh_host=10.0.1.220
-
-[hetzner]
-213.133.102.122 ansible_connection=ssh  ansible_ssh_user=root
-
-[vbox]
-vbox ansible_connection=ssh ansible_ssh_port=2222
-
