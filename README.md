@@ -3,9 +3,8 @@
 # Ansible Versions
 
 Supported Ansible versions:
-- = 2.0.1.0 - tested
 - = 2.1.1.0 - works
-- = 2.2.0.0 and later - broken 
+- = 2.2.0.0 - works 
 
 # FreeBSD, iocage and Ansible
 
@@ -25,7 +24,7 @@ How to use Ansible and iocage to set up a FreeBSD btsync server.
 ## Requirements
 
 1. Vagrant >= 1.8.1
-1. Ansible == 2.0.1
+1. Ansible >= 2.1.0
 1. VirtualBox
 
 ### Ansible Roles
